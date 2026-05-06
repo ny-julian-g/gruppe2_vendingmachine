@@ -37,7 +37,7 @@ public class UI {
             text.append("No snacks available.");
         } else {
             for (Snack snack : snacks) {
-                text.append(snack).append("\n");
+                text.append(snack.toString()).append("\n");
             }
         }
 
