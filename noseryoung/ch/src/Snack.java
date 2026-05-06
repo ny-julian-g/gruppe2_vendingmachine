@@ -1,14 +1,23 @@
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Snack {
     private String name;
     private int count;
     private int price;
     private int initialAmount;
+    private final int id;
+    private static AtomicInteger idCounter = new AtomicInteger(0);
 
     public Snack(String name, int initialAmount, int price){
        this.name= name;
        this.initialAmount = initialAmount;
        this.count = initialAmount;
        this.price = price;
+       this.id = idCounter.getAndAdd(1);
+    }
+
+    public String toString(){
+        return name + ": " + price + "$ (" + count + ")";
     }
 
     public int getCount() {
@@ -35,7 +44,16 @@ public class Snack {
         this.price = price;
     }
 
-    public int getInitialAmount() {
+    public int getInitialAmount(){
         return initialAmount;
     }
+
+    public void setInitialAmount(int initialAmount){
+        this.initialAmount = initialAmount;
+    }
+
+    public int getId(){
+        return id;
+    }
+
 }

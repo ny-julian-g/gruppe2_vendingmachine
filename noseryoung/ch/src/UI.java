@@ -6,7 +6,7 @@ public class UI {
     static ArrayList<Snack> snacks = new ArrayList<>();
     static SnackInventory inventory = new SnackInventory(snacks);
 
-    static void Menue () {
+    static void Menue() {
         String[] options = {"Show available Snacks", "Buy snack"};
 
         int choice = JOptionPane.showOptionDialog(
@@ -14,7 +14,7 @@ public class UI {
                 "Choose action:",
                 "Menue",
                 JOptionPane.DEFAULT_OPTION,
-                JOptionPane.PLAIN_MESSAGE,
+                JOptionPane.QUESTION_MESSAGE,
                 null,
                 options,
                 options[0]
@@ -49,7 +49,7 @@ public class UI {
         );
     }
 
-    static void buySnack(){
+     public static void buySnack(){
         List<Snack> availableSnacks = inventory.getAvailableSnacks();
 
         if (availableSnacks == null || availableSnacks.isEmpty()) {
@@ -57,18 +57,24 @@ public class UI {
             return;
         }
 
+        showSnacks(inventory);
+
         String[] options = availableSnacks.stream()
                 .map(Snack::toString)
                 .toArray(String[]::new);
 
         String choice = (String) JOptionPane.showInputDialog(
                 null,
-                "Select a snack:",
+                "Please enter the number of the snack you want to buy, if you want to cancel press 0:",
                 "Buy Snack",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                options,
-                options[0]
+                JOptionPane.PLAIN_MESSAGE
         );
+
+        if (choice == null) {
+            JOptionPane.showMessageDialog(null, "Cancel");
+        }
+        int index = Integer.parseInt(choice);
+        Snack selectedSnack = snacks.get(index);
+
     }
 }
