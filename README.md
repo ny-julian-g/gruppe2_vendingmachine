@@ -1,1 +1,9 @@
-# gruppe2_vendingmachine
+# Vending maschine Projekt
+
+## Inhaltsverzeichniss
+
+## Informieren
+
+## Planen
+
+## Kontrollieren
