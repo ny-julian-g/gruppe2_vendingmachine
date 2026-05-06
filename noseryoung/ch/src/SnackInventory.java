@@ -28,14 +28,13 @@ import java.util.Optional;
  *          getUnavailableSnacks (empty)
  *
  *      SecretKey Functions:
- *          restockSnacks (not Implemented)
- *          setPrice (not Implemented)
- *          changeSnack (not Implemented)
+ *          restockSnacks (exception)
+ *          setPrice (exception)
+ *          changeSnack (exception)
  */
 public class SnackInventory {
     private List<Snack> snacks;
     private List<Snack> emptyList = List.of();
-    private List<Integer> initialAmounts;
 
     public SnackInventory(List<Snack> snacks) {
         this.snacks = snacks;
@@ -85,6 +84,18 @@ public class SnackInventory {
         return availableSnacks;
     }
 
+    //restockSnacks (exception): restores all snacks to the initial value or
+    // optionally a set value, if you add a List of Integers (Wrapper).
+    public void restockSnacks(Optional<List<Integer>> values) {
+        List<Integer> amounts = values.orElseGet(this::getInitialValues);
+        if (amounts.size() != snacks.size()) throw new IllegalArgumentException
+                    ("List of snack amounts doesn't match amount of snacks");
+            for (int i = 0; i < snacks.size(); i++){
+                Snack s = snacks.get(i);
+                s.setCount(amounts.get(i));
+            }
+    }
+
     //setPrice (exception): You can set a new price for a snack
     public void setPrice(Snack snack, int price){
         if (snacks.isEmpty()) throw new IllegalArgumentException("No Snacks available");
@@ -107,17 +118,25 @@ public class SnackInventory {
            throw new IllegalArgumentException("Count can't be below zero(0)");
        if (price < 0)
            throw new IllegalArgumentException("Price can't be below zero(0)");
-       if (name.isEmpty())
+       if (name == null || name.isEmpty())
            throw new IllegalArgumentException("Name can't be empty");
 
        Snack newSnack = new Snack(name, count, price);
        snacks.set(snackPosition, newSnack);
     }
+
     private int indexOf(Object o){
         for (int i = 0; i < snacks.size(); i++){
             if (snacks.get(i) == o) return i;
         }
         throw new NoSuchElementException("Snack couldn't be found in List");
     }
-        
+
+    private List<Integer> getInitialValues(){
+        List<Integer> initValues = new ArrayList<>();
+        for (Snack snack : snacks){
+            initValues.add(snack.getInitialAmount());
+        }
+        return initValues;
+    }
 }
