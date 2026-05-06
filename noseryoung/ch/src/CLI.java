@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CLI {
     static ArrayList<Snack> snacks = new ArrayList<>();
@@ -23,12 +24,12 @@ public class CLI {
             showSnacks(inventory);
         }
         else {
-
+            buySnack();
         }
     }
 
     public static void showSnacks(SnackInventory inventory) {
-        ArrayList<Snack> snacks = inventory.getAvailableSnacks();
+        List<Snack> snacks = inventory.getAvailableSnacks();
 
         StringBuilder text = new StringBuilder("Available snacks:\n\n");
 
@@ -45,6 +46,29 @@ public class CLI {
                 text.toString(),
                 "Snack List",
                 JOptionPane.PLAIN_MESSAGE
+        );
+    }
+
+    static void buySnack(){
+        List<Snack> availableSnacks = inventory.getAvailableSnacks();
+
+        if (availableSnacks == null || availableSnacks.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No snacks available.");
+            return;
+        }
+
+        String[] options = availableSnacks.stream()
+                .map(Snack::toString)
+                .toArray(String[]::new);
+
+        String choice = (String) JOptionPane.showInputDialog(
+                null,
+                "Select a snack:",
+                "Buy Snack",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                options,
+                options[0]
         );
     }
 }
