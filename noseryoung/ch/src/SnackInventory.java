@@ -1,18 +1,21 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /*
  * How to use this Class:
  *
  * !Important!
- * No Function ever returns null! Either it returns an empty List
- * or it returns an empty optional field, that should be handled safely to avoid a:
- * "NoSuchElementException".
+ * No Function ever returns null! Either it returns an empty List,
+ * an empty optional field, that should be handled safely to avoid a:
+ * "NoSuchElementException". A Function that returns void, will be able to throw
+ * an exception.
  *
  * All Functions are marked with either:
  * - (empty)    -> can return an empty ArrayList
  * - (optional) -> can return an empty optional field.
+ * - (exception)-> will throw an exception, that has to be handled
  *
  *---------------------------------------------
  * Initialisation (Constructor):
@@ -25,10 +28,14 @@ import java.util.Optional;
  *          getUnavailableSnacks (empty)
  *
  *      SecretKey Functions:
+ *          restockSnacks (not Implemented)
+ *          setPrice (not Implemented)
+ *          changeSnack (not Implemented)
  */
 public class SnackInventory {
     private List<Snack> snacks;
     private List<Snack> emptyList = List.of();
+    private List<Integer> initialAmounts;
 
     public SnackInventory(List<Snack> snacks) {
         this.snacks = snacks;
@@ -77,4 +84,40 @@ public class SnackInventory {
         }
         return availableSnacks;
     }
+
+    //setPrice (exception): You can set a new price for a snack
+    public void setPrice(Snack snack, int price){
+        if (snacks.isEmpty()) throw new IllegalArgumentException("No Snacks available");
+        if (price < 0) throw new IllegalArgumentException("Price can't be lower than zero(0)");
+        boolean isInexistent = true;
+        for (Snack currentSnack : snacks) {
+            if (currentSnack == snack){
+                snack.setPrice(price);
+                isInexistent = false;
+            }
+        }
+        if(isInexistent) throw new NoSuchElementException("Snack not available");
+
+    }
+
+    //changeSnack (exception): You can change the attributes (e.g. Name: Cola -> Pepsi)
+    public void changeSnack(Snack oldSnack, String name, int count, int price){
+      int snackPosition = indexOf(oldSnack);
+        if (count < 0 )
+           throw new IllegalArgumentException("Count can't be below zero(0)");
+       if (price < 0)
+           throw new IllegalArgumentException("Price can't be below zero(0)");
+       if (name.isEmpty())
+           throw new IllegalArgumentException("Name can't be empty");
+
+       Snack newSnack = new Snack(name, count, price);
+       snacks.set(snackPosition, newSnack);
+    }
+    private int indexOf(Object o){
+        for (int i = 0; i < snacks.size(); i++){
+            if (snacks.get(i) == o) return i;
+        }
+        throw new NoSuchElementException("Snack couldn't be found in List");
+    }
+        
 }
