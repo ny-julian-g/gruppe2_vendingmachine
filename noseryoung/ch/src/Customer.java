@@ -1,11 +1,35 @@
+import exceptions.NotEnoughMoneyException;
+import exceptions.SnackNotFoundException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-/* SnackMachine was renamed to Customer. the SnackMachine class is not needed,
- * and i think its better to let a Customer class interface with the
- * SnackInventory and the CLI with the Customer class. this way,
- * you dont need a seperate class to manage the prices or manage
- * them in the CLI which doesnt make sense.
- * */
+/**
+* this class manages the money the customer has.
+* you can put money into the snack machine, get a snack
+* and cancel midway.
+* */
 public class Customer {
-    
+    private float money = 100.f;
+    SnackMachine snackMachine;
+
+    public Customer(SnackMachine snackMachine){
+        this.snackMachine = snackMachine;
+    }
+
+    public void putMoneyIntoMachine(float amount){
+        snackMachine.addMoney(amount);
+    }
+
+    public void buySnack(Snack snack){
+        snackMachine.buySnack(snack);
+        money += snackMachine.refundLeftoverMoney();
+    }
+
+    public void cancel(){
+        money += snackMachine.refundLeftoverMoney();
+    }
+
+    public float getMoney(){ return money; }
 }
