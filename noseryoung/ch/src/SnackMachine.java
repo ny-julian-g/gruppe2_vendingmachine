@@ -24,11 +24,11 @@ public class SnackMachine {
     }
 
     public void buySnack(Snack snack){
-        if (money < snack.getPrice()){
+        if (money < snackInventory.getPrice(snack)){
             throw new NotEnoughMoneyException("not enough money");
         }
 
-        snack.setCount(snack.getCount() - 1);
-        money -= snack.getPrice();
+        snackInventory.getSnack(snack);
+        money -= snackInventory.getPrice(snack);
     }
 }
