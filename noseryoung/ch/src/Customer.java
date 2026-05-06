@@ -1,10 +1,3 @@
-import exceptions.NotEnoughMoneyException;
-import exceptions.SnackNotFoundException;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
 /**
 * this class manages the money the customer has.
 * you can put money into the snack machine, get a snack

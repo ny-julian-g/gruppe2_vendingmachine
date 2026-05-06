@@ -16,6 +16,7 @@ public class SnackMachine {
         money += amount;
     }
 
+    // returns the amount of money that can be refunded
     public float refundLeftoverMoney(){
         float tmp_money = money;
         money = 0;

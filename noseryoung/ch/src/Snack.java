@@ -11,6 +11,10 @@ public class Snack {
        this.price = price;
     }
 
+    public String toString(){
+        return "name: " + name + ", count: " + count + ", price: " + price;
+    }
+
     public int getCount() {
         return count;
     }
