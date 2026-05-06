@@ -7,6 +7,11 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
+/**
+* Provides a static method to check whether a given password is correct and matches
+* the hash in `pwd.bin`.
+* */
 public class SecretKeyAuthenticator {
 
     private static final int iterations = 600000;
@@ -74,7 +79,10 @@ public class SecretKeyAuthenticator {
         return pwd;
     }
 
-    // returns true if password is correct, otherwise false
+    /**
+    * checks if a passphrase is correct
+    * @return boolean whether the password is correct
+    *  */
     public static boolean authenticatePassphrase(char[] pwd) {
         byte[] fileSalt = new byte[saltLengthBytes];
         byte[] fileHash = new byte[hashLengthBytes];
