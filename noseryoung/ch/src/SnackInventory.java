@@ -139,4 +139,8 @@ public class SnackInventory {
         }
         return initValues;
     }
+
+    public float getPrice(Snack snack){
+       return snack.getPrice();
+    }
 }
