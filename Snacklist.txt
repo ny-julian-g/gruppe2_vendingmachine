@@ -1,0 +1,14 @@
+Snackautomat - Snackliste
+
+- Coca-Cola
+	- ID: 1
+	- 3.50 Fr.
+- Eistee
+	- ID: 2
+	- 3.50 Fr.
+- Red Bull
+	- ID: 3
+	- 5.00 Fr.
+- Snickers
+	- ID: 4
+	- 4.60 Fr.
