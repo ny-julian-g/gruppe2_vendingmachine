@@ -22,13 +22,34 @@ Aufteilung gemäss UML
 SecretKeyAuthenticator -> Fabian
 UI/Design -> Liliane
 Inventory -> Julian
+Snack -> Julian + Fabian
+SnackMachine -> Fabian
+Customer -> Fabian
 
-SnachMachine wird später Aufgeteilt.
-
+wir haben folgendes UML zu dem ganzen erstellt
+![diagram.drawio (2).png](diagram.drawio%20%282%29.png)
 ### DoD
 Um später zu kontrollieren, ob wir das Projekt abgeschlossen haben, definieren wir hier folgende Anforderungen:
 
 - [ ] Anforderungen in Planen-Teil erfüllt
 - [ ] Programm läuft wie in Auftrag definiert
+
+
+## Entscheiden
+Wir haben uns entschieden, eine UI statt CLI zu implementiere, da es interessanter ist. Dazu
+haben wir Java swing benutzt.
+
+## Realisieren
+Beim Realisieren haben wir darauf geachtet, Immer Kommentare zu hinterlassen. Das
+ist das die anderen Teammitglieder die Funktionen verstehen, ohne den ganzen Code
+zu lesen.
+
+Für den Secret key haben wir eine File benutzt, die den salt und hash eines Password
+enthält. Dies ist kryptographisch sicher, und man kann mit dem inhalt der datei
+überprüfen, ob ein passwort korrekt ist.
+
+Wir haben implementiert, dass beim UI die normalen aktionen (snack kaufen) durch den UI -> Customer ->
+SnackMachine -> SnackInventory fliessen, was die logik einfacehr macht. Aber bei den Admin-funktionen
+geht es von UI direkt zum Inventory, da diese keine logik enthalten.
   
 ## Kontrollieren
