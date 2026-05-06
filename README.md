@@ -29,6 +29,6 @@ SnachMachine wird später Aufgeteilt.
 Um später zu kontrollieren, ob wir das Projekt abgeschlossen haben, definieren wir hier folgende Anforderungen:
 
 - [ ] Anforderungen in Planen-Teil erfüllt
-- [ ]Programm läuft wie in Auftrag definiert
+- [ ] Programm läuft wie in Auftrag definiert
   
 ## Kontrollieren
