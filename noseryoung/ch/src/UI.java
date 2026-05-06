@@ -6,6 +6,32 @@ public class UI {
     static ArrayList<Snack> snacks = new ArrayList<>();
     static SnackInventory inventory = new SnackInventory(snacks);
 
+    public static boolean login() {
+        JPasswordField passwordField = new JPasswordField();
+
+        int option = JOptionPane.showConfirmDialog(
+                null,
+                passwordField,
+                "Enter password",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE
+        );
+
+        if (option == JOptionPane.OK_OPTION) {
+            char[] pwd = passwordField.getPassword();
+
+            boolean authenticated = SecretKeyAuthenticator.authenticatePassphrase(pwd);
+
+            if (!authenticated) {
+                JOptionPane.showMessageDialog(null, "Wrong password!");
+            }
+
+            return authenticated;
+        }
+
+        return false;
+    }
+
     static void Menue() {
         String[] options = {"Show available Snacks", "Buy snack"};
 
