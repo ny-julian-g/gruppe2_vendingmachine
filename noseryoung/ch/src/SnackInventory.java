@@ -1,54 +1,58 @@
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 /*
- * For this class, there are several requirements and methods, I can think of:
- * 1. If SnackMachine wants a snack, it should give it over to him
+ * How to use this Class:
  *
- * 2. When the SnackMachine wants a snack, it should check, if there are any
- *  of the required Snack available
+ * !Important!
+ * No Function ever returns null! Either it returns an empty List
+ * or it returns an empty optional field, that should be handled safely to avoid a:
+ * "NoSuchElementException".
  *
- * 3. When the SnackMachine wants to GET all the Snacks, it should be able
- *  to list all the Snacks, that are available
+ * All Functions are marked with either:
+ * - (empty)    -> can return an empty ArrayList
+ * - (optional) -> can return an empty optional field.
  *
- * 4. I think it's usefull to also implement a Method, that returns all Snacks,
- *  that are empty.
- *
- * 5. The Inventory should of course have a dynamic List of all Snacks as Objects.
- *--------------------------------------------
- * How to use this Class
- *
+ *---------------------------------------------
  * Initialisation (Constructor):
  * for now, you have to give a ArrayList of all Snacks as parameters to the constructor.
  *
- * Functions:
- * getSnack: Returns an Object of the desired Snack, if available.
- * getAvailableSnacks: Returns an ArrayList of all Snacks, that are available.
- * getUnavailableSnacks: Returns an ArrayList of all Snacks, that are unavailable.
+ * implemented Functions:
+ *      User Functions:
+ *          getSnack (optional)
+ *          getAvailableSnacks (empty)
+ *          getUnavailableSnacks (empty)
+ *
+ *      SecretKey Functions:
  */
 public class SnackInventory {
-    ArrayList<Snack> snacks;
+    private ArrayList<Snack> snacks;
+    private List<Snack> emptyList = List.of();
 
-    public SnackInventory(ArrayList snacks) {
+    public SnackInventory(ArrayList<Snack> snacks) {
         this.snacks = snacks;
     }
 
-    public Snack getSnack(Snack desiredSnack) {
-        if (snacks.isEmpty()) return null;
+   //getSnack (optional): Returns an Object of the desired Snack, if available. Reduces the Snack Count by 1.
+    public Optional<Snack> getSnack(Snack desiredSnack) {
+        if (snacks.isEmpty()) return Optional.empty();
         for (Snack snack : snacks) {
             int count = snack.getCount();
             if (snack.equals(desiredSnack)) {
                 if (count > 0) {
                     snack.setCount(count - 1);
-                    return snack;
-                } else return null;
+                    return Optional.of(snack);
+                } else return Optional.empty();
             }
         }
         System.out.println("No Snack found");
-        return null;
+        return Optional.empty();
     }
 
-    public ArrayList getAvailableSnacks() {
-        if (snacks.isEmpty()) return null;
+   //getAvailableSnacks (empty): Returns an ArrayList of all Snacks, that are available.
+    public List<Snack> getAvailableSnacks() {
+        if (snacks.isEmpty()) return emptyList;
         ArrayList<Snack> availableSnacks = new ArrayList<>();
 
         for (Snack snack : snacks) {
@@ -60,8 +64,9 @@ public class SnackInventory {
         return availableSnacks;
     }
 
-    public ArrayList getUnavailableSnacks(){
-        if (snacks.isEmpty()) return null;
+    //getUnavailableSnacks (empty): Returns an ArrayList of all Snacks, that are unavailable.
+    public List<Snack> getUnavailableSnacks(){
+        if (snacks.isEmpty()) return emptyList;
         ArrayList<Snack> availableSnacks = new ArrayList<>();
 
         for (Snack snack : snacks) {
