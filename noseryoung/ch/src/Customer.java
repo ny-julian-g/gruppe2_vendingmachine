@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
 * this class manages the money the customer has.
 * you can put money into the snack machine, get a snack
@@ -25,4 +27,8 @@ public class Customer {
     }
 
     public float getMoney(){ return money; }
+
+    public List<Snack> getAvailableSnacks() {
+        return snackMachine.getAvailableSnacks();
+    }
 }
