@@ -27,10 +27,10 @@ import java.util.Optional;
  *      SecretKey Functions:
  */
 public class SnackInventory {
-    private ArrayList<Snack> snacks;
+    private List<Snack> snacks;
     private List<Snack> emptyList = List.of();
 
-    public SnackInventory(ArrayList<Snack> snacks) {
+    public SnackInventory(List<Snack> snacks) {
         this.snacks = snacks;
     }
 
@@ -50,7 +50,7 @@ public class SnackInventory {
         return Optional.empty();
     }
 
-   //getAvailableSnacks (empty): Returns an ArrayList of all Snacks, that are available.
+   //getAvailableSnacks (empty): Returns a List of all Snacks, that are available.
     public List<Snack> getAvailableSnacks() {
         if (snacks.isEmpty()) return emptyList;
         ArrayList<Snack> availableSnacks = new ArrayList<>();
@@ -64,7 +64,7 @@ public class SnackInventory {
         return availableSnacks;
     }
 
-    //getUnavailableSnacks (empty): Returns an ArrayList of all Snacks, that are unavailable.
+    //getUnavailableSnacks (empty): Returns a List of all Snacks, that are unavailable.
     public List<Snack> getUnavailableSnacks(){
         if (snacks.isEmpty()) return emptyList;
         ArrayList<Snack> availableSnacks = new ArrayList<>();
