@@ -2,10 +2,12 @@ public class Snack {
     private String name;
     private int count;
     private int price;
+    private int initialAmount;
 
-    public Snack(String name, int count, int price){
+    public Snack(String name, int initialAmount, int price){
        this.name= name;
-       this.count = count;
+       this.initialAmount = initialAmount;
+       this.count = initialAmount;
        this.price = price;
     }
 
@@ -32,4 +34,5 @@ public class Snack {
     public void setPrice(int price) {
         this.price = price;
     }
+
 }
