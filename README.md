@@ -13,14 +13,14 @@ Um zu wissen, was wir machen müssen, ist es hilfreich eine Liste, aller Anforde
 
 ### Aufteilung des Programmes
 Aufteilung gemäss UML
-- CLI
+- UI
 - SnackMachine (preis Logik)
 - SnackInventory
 - SecretKeyAuthenticator
 
 ## Planen
 SecretKeyAuthenticator -> Fabian
-CLI/Design -> Liliane
+UI/Design -> Liliane
 Inventory -> Julian
 
 SnachMachine wird später Aufgeteilt.

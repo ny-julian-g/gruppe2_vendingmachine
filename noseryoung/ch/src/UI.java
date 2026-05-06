@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CLI {
+public class UI {
     static ArrayList<Snack> snacks = new ArrayList<>();
     static SnackInventory inventory = new SnackInventory(snacks);
 
