@@ -35,4 +35,7 @@ public class Snack {
         this.price = price;
     }
 
+    public int getInitialAmount() {
+        return initialAmount;
+    }
 }
