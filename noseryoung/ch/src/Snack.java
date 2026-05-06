@@ -12,7 +12,7 @@ public class Snack {
     }
 
     public String toString(){
-        return "name: " + name + ", count: " + count + ", price: " + price;
+        return name + ": " + price + "$ (" + count + ")";
     }
 
     public int getCount() {
