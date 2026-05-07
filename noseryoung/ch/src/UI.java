@@ -5,6 +5,8 @@ import java.util.List;
 public class UI {
     static ArrayList<Snack> snacks = new ArrayList<>();
     static SnackInventory inventory = new SnackInventory(snacks);
+    static SnackMachine snackMachine = new SnackMachine(inventory);
+    static Customer customer = new Customer(snackMachine);
 
     public static boolean login() {
         JPasswordField passwordField = new JPasswordField();
@@ -47,15 +49,15 @@ public class UI {
         );
 
         if (choice == 0) {
-            showSnacks(inventory);
+            showSnacks();
         }
         else {
             buySnack();
         }
     }
 
-    public static void showSnacks(SnackInventory inventory) {
-        List<Snack> snacks = inventory.getAvailableSnacks();
+    public static void showSnacks() {
+        List<Snack> snacks = customer.getAvailableSnacks();
 
         StringBuilder text = new StringBuilder("Available snacks:\n\n");
 
@@ -76,14 +78,14 @@ public class UI {
     }
 
      public static void buySnack(){
-        List<Snack> availableSnacks = inventory.getAvailableSnacks();
+        List<Snack> availableSnacks = customer.getAvailableSnacks();
 
         if (availableSnacks == null || availableSnacks.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No snacks available.");
             return;
         }
 
-        showSnacks(inventory);
+        showSnacks();
 
         String[] options = availableSnacks.stream()
                 .map(Snack::toString)
@@ -99,8 +101,14 @@ public class UI {
         if (choice == null) {
             JOptionPane.showMessageDialog(null, "Cancel");
         }
-        int index = Integer.parseInt(choice);
-        Snack selectedSnack = snacks.get(index);
+        try {
+            int index = Integer.parseInt(choice);
+            Snack selectedSnack = availableSnacks.get(index);
+            customer.buySnack(selectedSnack);
+            JOptionPane.showMessageDialog(null, "Purchase successful! " + selectedSnack.getName() );
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error with : " + e.getMessage());
+        }
 
     }
 }
