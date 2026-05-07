@@ -47,7 +47,7 @@ public class Customer {
         snackMachine.setPrice(snack, price);
     }
 
-    public void changeSnack(Snack oldSnack, String name, int count, int price) {
+    public void changeSnack(Snack oldSnack, String name, int count, float price) {
         snackMachine.changeSnack(oldSnack, name, count, price);
     }
 }

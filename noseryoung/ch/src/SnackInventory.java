@@ -111,7 +111,7 @@ public class SnackInventory {
     }
 
     //changeSnack (exception): You can change the attributes (e.g. Name: Cola -> Pepsi)
-    public void changeSnack(Snack oldSnack, String name, int count, int price){
+    public void changeSnack(Snack oldSnack, String name, int count, float price){
       int snackPosition = indexOf(oldSnack);
         if (count < 0 )
            throw new IllegalArgumentException("Count can't be below zero(0)");

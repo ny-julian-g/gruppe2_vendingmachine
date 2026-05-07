@@ -16,8 +16,8 @@ public class UI {
     SnackMachine snackMachine = new SnackMachine(inventory);
     Customer customer = new Customer(snackMachine);
 
-    public void main(String[] args){
-        while (Menu()){
+    public void main(String[] args) {
+        while (Menu()) {
         }
     }
 
@@ -37,14 +37,11 @@ public class UI {
 
         if (choice == 0) {
             showSnacks();
-        }
-        else if (choice == 1){
+        } else if (choice == 1) {
             putMoneyInMachine();
-        }
-        else if (choice == 2) {
+        } else if (choice == 2) {
             buySnack();
-        }
-        else{
+        } else {
             return false;
         }
         return true;
@@ -73,7 +70,7 @@ public class UI {
 
     }
 
-     void buySnack(){
+    void buySnack() {
         List<Snack> availableSnacks = customer.getAvailableSnacks();
 
         if (availableSnacks == null || availableSnacks.isEmpty()) {
@@ -87,66 +84,58 @@ public class UI {
 
         String choice = JOptionPane.showInputDialog(
                 null,
-                "Please enter the snack ID. there are " + snackMachine.getMoney()  + "$ in the machine",
+                "Please enter the snack ID. there are " + snackMachine.getMoney() + "$ in the machine",
                 "Buy Snack",
                 JOptionPane.PLAIN_MESSAGE
         );
 
-        if(choice == null){
+        if (choice == null) {
             return;
         }
 
-         if (SecretKeyAuthenticator.authenticatePassphrase(choice.toCharArray())) {
-             JOptionPane.showMessageDialog(
-                     null,
-                     "Admin access granted!"
-             );
-                AdminMenu();
-             return;
-         }
+        if (SecretKeyAuthenticator.authenticatePassphrase(choice.toCharArray())) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Admin access granted!"
+            );
+            AdminMenu();
+            return;
+        }
         try {
             int id = Integer.parseInt(choice);
             Snack selectedSnack = availableSnacks.get(id);
             customer.buySnack(selectedSnack);
-            JOptionPane.showMessageDialog(null, "Purchase successful! " + selectedSnack.getName() );
-        }
-        catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Purchase successful! " + selectedSnack.getName());
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Please enter a valid number");
-        }
-        catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Option is not available :(");
-        }
-        catch (IllegalStateException e){
+        } catch (IllegalStateException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        catch (NotEnoughMoneyException e) {
+        } catch (NotEnoughMoneyException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "unexpected Error occurred: " + e);
         }
     }
 
-    void putMoneyInMachine(){
+    void putMoneyInMachine() {
         String choice = JOptionPane.showInputDialog(
                 null,
                 "Enter the amount of money to put in the machine. you have " + customer.getMoney() + "$",
                 "put money in machine",
                 JOptionPane.PLAIN_MESSAGE
         );
-        if (choice == null)return;
-        try{
+        if (choice == null) return;
+        try {
             customer.putMoneyIntoMachine(Integer.parseInt(choice));
 
             JOptionPane.showMessageDialog(null, "success");
-        }
-        catch (NotEnoughMoneyException e) {
+        } catch (NotEnoughMoneyException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Please just enter plain numbers");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Unexpected Error occurred:" + e);
         }
     }
@@ -174,16 +163,13 @@ public class UI {
         if (choice == 0) {
             changeSnackUI();
             AdminMenu();
-        }
-        else if (choice == 1) {
+        } else if (choice == 1) {
             restockSnacksUI();
             AdminMenu();
-        }
-        else if (choice == 2) {
+        } else if (choice == 2) {
             setPriceUI();
             AdminMenu();
-        }
-        else if (choice == 3) {
+        } else if (choice == 3) {
             return;
         }
     }
@@ -210,7 +196,7 @@ public class UI {
                         JOptionPane.QUESTION_MESSAGE
                 );
                 if (input == null) return;
-                if(input.trim().isEmpty()) amounts.add(snack.getCount());
+                if (input.trim().isEmpty()) amounts.add(snack.getCount());
                 else amounts.add(Integer.parseInt(input.trim()));
             }
             customer.restockSnacks(Optional.of(amounts));
@@ -220,11 +206,9 @@ public class UI {
                     "Snacks restocked successfully!"
             );
 
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid number.");
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
@@ -256,8 +240,8 @@ public class UI {
             if (priceInput == null) return;
             float newPrice;
 
-            if(priceInput.trim().isEmpty()) newPrice =  selectedSnack.getPrice();
-            else  newPrice = Float.parseFloat(priceInput);
+            if (priceInput.trim().isEmpty()) newPrice = selectedSnack.getPrice();
+            else newPrice = Float.parseFloat(priceInput);
 
             customer.setPrice(selectedSnack, newPrice);
 
@@ -266,14 +250,11 @@ public class UI {
                     "Price updated successfully!"
             );
 
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid number.");
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Invalid snack ID.");
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
@@ -293,7 +274,7 @@ public class UI {
                     null,
                     "Enter snack ID to change:"
             );
-            if (idInput == null)return;
+            if (idInput == null) return;
             int id = Integer.parseInt(idInput);
 
             Snack oldSnack = availableSnacks.get(id);
@@ -303,19 +284,21 @@ public class UI {
                     "Enter new name:"
             );
 
-            int newCount = Integer.parseInt(
-                    JOptionPane.showInputDialog(
-                            null,
-                            "Enter new count:"
-                    )
+            String input = JOptionPane.showInputDialog(
+                    null,
+                    "Enter new count:"
             );
+            if (input == null) return;
+            int newCount = Integer.parseInt(input);
+            input = null;
 
-            int newPrice = Integer.parseInt(
-                    JOptionPane.showInputDialog(
-                            null,
-                            "Enter new price:"
-                    )
+            input = JOptionPane.showInputDialog(
+                    null,
+                    "Enter new price:"
             );
+            if (input == null) return;
+            float newPrice = Float.parseFloat(input);
+            input = null;
 
             customer.changeSnack(
                     oldSnack,
@@ -329,11 +312,9 @@ public class UI {
                     "Snack updated successfully!"
             );
 
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid number.");
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Invalid snack ID.");
         }
     }
