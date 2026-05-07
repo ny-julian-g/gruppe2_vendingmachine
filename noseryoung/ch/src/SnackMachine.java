@@ -36,4 +36,8 @@ public class SnackMachine {
     public List<Snack> getAvailableSnacks() {
         return snackInventory.getAvailableSnacks();
     }
+
+    public float getMoney(){
+        return money;
+    }
 }

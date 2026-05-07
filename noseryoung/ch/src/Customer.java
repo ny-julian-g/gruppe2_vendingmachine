@@ -1,3 +1,5 @@
+import exceptions.NotEnoughMoneyException;
+
 import java.util.List;
 
 /**
@@ -14,7 +16,11 @@ public class Customer {
     }
 
     public void putMoneyIntoMachine(float amount){
+        if (amount > money){
+            throw new NotEnoughMoneyException("not enough money");
+        }
         snackMachine.addMoney(amount);
+        money -= amount;
     }
 
     public void buySnack(Snack snack){

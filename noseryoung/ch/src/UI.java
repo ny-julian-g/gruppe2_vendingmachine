@@ -1,83 +1,32 @@
+import exceptions.NotEnoughMoneyException;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UI {
-    static ArrayList<Snack> snacks = new ArrayList<>();
-    static SnackInventory inventory = new SnackInventory(snacks);
-    static SnackMachine snackMachine = new SnackMachine(inventory);
-    static Customer customer = new Customer(snackMachine);
+    ArrayList<Snack> snacks = new ArrayList<>(
+            List.of(
+                    new Snack("white monster", 100, 8)
+            )
+    );
 
-    public static void startingPage(String[] args) {
+    SnackInventory inventory = new SnackInventory(snacks);
+    SnackMachine snackMachine = new SnackMachine(inventory);
+    Customer customer = new Customer(snackMachine);
 
-        String[] options = {"Login", "Skip Login", "Exit"};
-
-        int choice = JOptionPane.showOptionDialog(
-                null,
-                "Welcome! Do you want to Login or continue without?",
-                "Start",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[0]
-        );
-
-        switch (choice) {
-
-            case 0: // Login
-                if (login()) {
-                    JOptionPane.showMessageDialog(null, "Login successful!");
-                    Menue();
-                } else {
-                    startingPage(args);
-                }
-                break;
-
-            case 1: // Skip
-                JOptionPane.showMessageDialog(null, "Continuing without login");
-                Menue();
-                break;
-
-            default: // Exit or close window
-                JOptionPane.showMessageDialog(null, "Goodbye!");
-                System.exit(0);
+    public void main(String[] args){
+        while (Menu()){
         }
     }
 
-    public static boolean login() {
-        JPasswordField passwordField = new JPasswordField();
-
-        int option = JOptionPane.showConfirmDialog(
-                null,
-                passwordField,
-                "Enter password",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.PLAIN_MESSAGE
-        );
-
-        if (option == JOptionPane.OK_OPTION) {
-            char[] pwd = passwordField.getPassword();
-
-            boolean authenticated = SecretKeyAuthenticator.authenticatePassphrase(pwd);
-
-            if (!authenticated) {
-                JOptionPane.showMessageDialog(null, "Wrong password!");
-            }
-
-            return authenticated;
-        }
-
-        return false;
-    }
-
-    static void Menue() {
-        String[] options = {"Show available Snacks", "Buy snack"};
+    boolean Menu() {
+        String[] options = {"Show available Snacks", "Put money in machine", "buy snack", "exit"};
 
         int choice = JOptionPane.showOptionDialog(
                 null,
                 "Choose action:",
-                "Menue",
+                "Menu",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
@@ -88,12 +37,19 @@ public class UI {
         if (choice == 0) {
             showSnacks();
         }
-        else {
+        else if (choice == 1){
+            putMoneyInMachine();
+        }
+        else if (choice == 2) {
             buySnack();
         }
+        else{
+            return false;
+        }
+        return true;
     }
 
-    public static void showSnacks() {
+    void showSnacks() {
         List<Snack> snacks = customer.getAvailableSnacks();
 
         StringBuilder text = new StringBuilder("Available snacks:\n\n");
@@ -113,21 +69,9 @@ public class UI {
                 JOptionPane.PLAIN_MESSAGE
         );
 
-        int choice = JOptionPane.showConfirmDialog(
-                null,
-                "Do you want to return to buy?",
-                "Return to Menu",
-                JOptionPane.YES_NO_OPTION
-        );
-
-        if (choice == JOptionPane.YES_OPTION) {
-            buySnack();
-        } else {
-            Menue();
-        }
     }
 
-     public static void buySnack(){
+     void buySnack(){
         List<Snack> availableSnacks = customer.getAvailableSnacks();
 
         if (availableSnacks == null || availableSnacks.isEmpty()) {
@@ -135,30 +79,50 @@ public class UI {
             return;
         }
 
-        showSnacks();
-
         String[] options = availableSnacks.stream()
                 .map(Snack::toString)
                 .toArray(String[]::new);
 
-        String choice = (String) JOptionPane.showInputDialog(
+        String choice = JOptionPane.showInputDialog(
                 null,
-                "Please enter the number of the snack you want to buy, if you want to cancel press 0:",
+                "Please enter the snack ID, enter -1 to cancel. there are " + snackMachine.getMoney()  + "$ in the machine",
                 "Buy Snack",
                 JOptionPane.PLAIN_MESSAGE
         );
 
-        if (choice == null) {
-            JOptionPane.showMessageDialog(null, "Cancel");
-        }
-        try {
-            int index = Integer.parseInt(choice);
-            Snack selectedSnack = availableSnacks.get(index);
-            customer.buySnack(selectedSnack);
-            JOptionPane.showMessageDialog(null, "Purchase successful! " + selectedSnack.getName() );
-        }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error with : " + e.getMessage());
+        if(choice == null){
+            return;
         }
 
+        if (choice.equals("-1")) {
+            JOptionPane.showMessageDialog(null, "Cancelled");
+        }
+        try {
+            int id = Integer.parseInt(choice);
+            Snack selectedSnack = availableSnacks.get(id);
+            customer.buySnack(selectedSnack);
+            JOptionPane.showMessageDialog(null, "Purchase successful! " + selectedSnack.getName() );
+        }
+        catch (NotEnoughMoneyException e) {
+            JOptionPane.showMessageDialog(null, "Not enough money :(");
+        }
+    }
+
+    void putMoneyInMachine(){
+        String choice = JOptionPane.showInputDialog(
+                null,
+                "Enter the amount of money to put in the machine. you have " + customer.getMoney() + "$",
+                "put money in machine",
+                JOptionPane.PLAIN_MESSAGE
+        );
+
+        try{
+            customer.putMoneyIntoMachine(Integer.parseInt(choice));
+
+            JOptionPane.showMessageDialog(null, "success");
+        }
+        catch (NotEnoughMoneyException e){
+            JOptionPane.showMessageDialog(null, "Not enough money :(");
+        }
     }
 }
