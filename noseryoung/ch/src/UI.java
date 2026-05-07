@@ -5,6 +5,45 @@ import java.util.List;
 public class UI {
     static ArrayList<Snack> snacks = new ArrayList<>();
     static SnackInventory inventory = new SnackInventory(snacks);
+    static SnackMachine snackMachine = new SnackMachine(inventory);
+    static Customer customer = new Customer(snackMachine);
+
+    public static void startingPage(String[] args) {
+
+        String[] options = {"Login", "Skip Login", "Exit"};
+
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                "Welcome! Do you want to Login or continue without?",
+                "Start",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+
+        switch (choice) {
+
+            case 0: // Login
+                if (login()) {
+                    JOptionPane.showMessageDialog(null, "Login successful!");
+                    Menue();
+                } else {
+                    startingPage(args);
+                }
+                break;
+
+            case 1: // Skip
+                JOptionPane.showMessageDialog(null, "Continuing without login");
+                Menue();
+                break;
+
+            default: // Exit or close window
+                JOptionPane.showMessageDialog(null, "Goodbye!");
+                System.exit(0);
+        }
+    }
 
     public static boolean login() {
         JPasswordField passwordField = new JPasswordField();
@@ -47,15 +86,15 @@ public class UI {
         );
 
         if (choice == 0) {
-            showSnacks(inventory);
+            showSnacks();
         }
         else {
             buySnack();
         }
     }
 
-    public static void showSnacks(SnackInventory inventory) {
-        List<Snack> snacks = inventory.getAvailableSnacks();
+    public static void showSnacks() {
+        List<Snack> snacks = customer.getAvailableSnacks();
 
         StringBuilder text = new StringBuilder("Available snacks:\n\n");
 
@@ -73,17 +112,30 @@ public class UI {
                 "Snack List",
                 JOptionPane.PLAIN_MESSAGE
         );
+
+        int choice = JOptionPane.showConfirmDialog(
+                null,
+                "Do you want to return to buy?",
+                "Return to Menu",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (choice == JOptionPane.YES_OPTION) {
+            buySnack();
+        } else {
+            Menue();
+        }
     }
 
      public static void buySnack(){
-        List<Snack> availableSnacks = inventory.getAvailableSnacks();
+        List<Snack> availableSnacks = customer.getAvailableSnacks();
 
         if (availableSnacks == null || availableSnacks.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No snacks available.");
             return;
         }
 
-        showSnacks(inventory);
+        showSnacks();
 
         String[] options = availableSnacks.stream()
                 .map(Snack::toString)
@@ -99,8 +151,14 @@ public class UI {
         if (choice == null) {
             JOptionPane.showMessageDialog(null, "Cancel");
         }
-        int index = Integer.parseInt(choice);
-        Snack selectedSnack = snacks.get(index);
+        try {
+            int index = Integer.parseInt(choice);
+            Snack selectedSnack = availableSnacks.get(index);
+            customer.buySnack(selectedSnack);
+            JOptionPane.showMessageDialog(null, "Purchase successful! " + selectedSnack.getName() );
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error with : " + e.getMessage());
+        }
 
     }
 }
