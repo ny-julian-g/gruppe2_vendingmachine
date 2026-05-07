@@ -1,4 +1,4 @@
-# Vendingmaschine Projekt
+# Verkaufsautomat Projekt
 
 ## Inhaltsverzeichniss
 ## Informieren
@@ -26,8 +26,9 @@ Snack -> Julian + Fabian,
 SnackMachine -> Fabian,
 Customer -> Fabian
 
-wir haben folgendes UML zu dem ganzen erstellt
+Wir haben folgendes UML zum ganzen erstellt:
 ![diagram.drawio (2).png](diagram.drawio%20%282%29.png)
+
 ### DoD
 Um später zu kontrollieren, ob wir das Projekt abgeschlossen haben, definieren wir hier folgende Anforderungen:
 
@@ -37,21 +38,18 @@ Um später zu kontrollieren, ob wir das Projekt abgeschlossen haben, definieren 
 
 
 ## Entscheiden
-Wir haben uns entschieden, eine UI statt CLI zu implementiere, da es interessanter ist. Dazu
+Wir haben uns entschieden, ein UI statt CLI zu implementieren, da es interessanter ist. Dazu
 haben wir Java swing benutzt.
 
 ## Realisieren
-Beim Realisieren haben wir darauf geachtet, Immer Kommentare zu hinterlassen. Das
-ist das die anderen Teammitglieder die Funktionen verstehen, ohne den ganzen Code
-zu lesen.
+Beim Realisieren haben wir darauf geachtet, immer Kommentare zu hinterlassen. Dadurch verstehen die anderen Teammitglieder die Funktionen, ohne den ganzen Code lesen zu müssen.
 
-Für den Secret key haben wir eine File benutzt, die den salt und hash eines Password
-enthält. Dies ist kryptographisch sicher, und man kann mit dem inhalt der datei
-überprüfen, ob ein passwort korrekt ist.
+Für den Secret-Key haben wir eine File benutzt, die den salt und hash eines Password
+enthält. Dies ist kryptographisch sicher, und man kann mit dem Inhalt der Datei
+überprüfen, ob ein Passwort korrekt ist.
 
 Wir haben implementiert, dass beim UI die normalen aktionen (snack kaufen) durch den UI -> Customer ->
-SnackMachine -> SnackInventory fliessen, was die logik einfacher macht und das EVA-Prinzip umsetzt. Aber bei den Admin-funktionen
-geht es von UI direkt zum Inventory, da diese keine logik enthalten.
+SnackMachine -> SnackInventory fliessen, was die logik einfacher macht und das EVA-Prinzip umsetzt. Aber bei den Admin-funktionen geht es von UI direkt zum Inventory, da diese keine logik enthalten.
 
 Jegliche falschen Eingaben werden überprüft und mit einer Exception gehandelt, die im Frontend angezeigt wird. Dadurch konnten wir unser Programm "idiotensicher" machen und Abstürze verhindern. 
   
@@ -59,3 +57,9 @@ Jegliche falschen Eingaben werden überprüft und mit einer Exception gehandelt,
 
 
 ## Auswerten
+
+### Fabian
+
+### Julian
+
+### Liliane
