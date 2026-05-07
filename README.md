@@ -97,7 +97,7 @@ etwa gleich viel am Projekt. Das wir mit Kommentaren arbeiteten war für mich au
 gewöhnen und es half definitiv, den Code zu lesen, wobei ich fand, dass der Code meines Teams einfach zu lesen war.
 
 ### Liliane 
-Am Anfang des Projektes haben wir zusammen besprochen wer was machen soll. Dies fand ich sehr gut, den so war die Arbeits Aufteilung schon klar. Vielleicht hätten wir etwas genauer besprechen sollen was für Funktionen wir machen und wer sich um diese kümmert. Trotzdem hat jedes Gruppenmitglied seinen Teil des Projektes gut gemacht und den anderen bei Problemen geholfen. 
-Während dem Projekt haben wir sehr viel über Teams kommuniziert, dies fand ich sehr nützlich. Denn so mussten wir uns nicht für jede Frage treffen. Dank der guten Kommunikation konnten wir Mergekonfikte vermeiden. 
-Was mir nicht so einfach viel, waren die Kommentäre zum Code. Ich schreibe normalerweise sehr selten Kommentare, was sich in meinem Code wiederspiegelt. 
-Als Schlussvolgerung finde ich, das wir ein gutes Projekt gemacht haben und ein gutes Team sind.
+Am Anfang des Projektes haben wir gemeinsam besprochen wer was machen soll. Das fand ich sehr gut, denn so war die Arbeitsaufteilung von Anfang an klar. Vielleicht hätten wir etwas genauer besprechen sollen, welche Funktionen wir usetzen und wer dafürr Verantwortlich ist. Trotzdem hat jedes Gruppenmitglied seinen Teil des Projektes gut erledigt und den anderen bei Problemen geholfen. 
+Während dem Projekt haben wir viel über Teams kommuniziert, was ich sehr nützlich fand. So mussten wir uns nicht für jede kleine Frage persönlich treffen, sondern konnten viele Dinge schnell online klären. Dank der guten Kommunikation konnten wir Mergekonfikte vermeiden. 
+Was mir nicht so einfach fiel, waren die Kommentare zum Code. Ich schreibe normalerweise sehr selten Kommentare, was sich auch in meinem Code wiederspiegelt. 
+Zusammenfassend finde ich, das wir ein gutes Projekt umgesetzt haben.
