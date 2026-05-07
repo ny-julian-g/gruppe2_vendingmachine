@@ -16,7 +16,7 @@ public class UI {
     SnackMachine snackMachine = new SnackMachine(inventory);
     Customer customer = new Customer(snackMachine);
 
-    public void main(String[] args) {
+    void main(String[] args) {
         while (Menu()) {
         }
     }
@@ -141,36 +141,35 @@ public class UI {
     }
 
     void AdminMenu() {
+        while (true) {
 
-        String[] options = {
-                "Change Snack",
-                "restore Snack",
-                "set Price",
-                "Exit Admin Mode"
-        };
+            String[] options = {
+                    "Change Snack",
+                    "restore Snack",
+                    "set Price",
+                    "Exit Admin Mode"
+            };
 
-        int choice = JOptionPane.showOptionDialog(
-                null,
-                "Admin Menu",
-                "Admin Menu",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                options,
-                options[0]
-        );
+            int choice = JOptionPane.showOptionDialog(
+                    null,
+                    "Admin Menu",
+                    "Admin Menu",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    options,
+                    options[0]
+            );
 
-        if (choice == 0) {
-            changeSnackUI();
-            AdminMenu();
-        } else if (choice == 1) {
-            restockSnacksUI();
-            AdminMenu();
-        } else if (choice == 2) {
-            setPriceUI();
-            AdminMenu();
-        } else if (choice == 3) {
-            return;
+            if (choice == 0) {
+                changeSnackUI();
+            } else if (choice == 1) {
+                restockSnacksUI();
+            } else if (choice == 2) {
+                setPriceUI();
+            } else if (choice == 3) {
+                return;
+            }
         }
     }
 
