@@ -94,6 +94,12 @@ public class UI {
                 Snack selectedSnack = availableSnacks.get(id);
                 customer.buySnack(selectedSnack);
                 JOptionPane.showMessageDialog(null, "Enjoy your " + selectedSnack.getName() + "!");
+            }catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Invalid Number.");
+            } catch (IndexOutOfBoundsException e) {
+                JOptionPane.showMessageDialog(null, "Snack ID " + choice + " not found.");
+            } catch (NotEnoughMoneyException e) {
+                JOptionPane.showMessageDialog(null, "Not enough money! 💸");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
             }
