@@ -1,10 +1,10 @@
 import exceptions.NotEnoughMoneyException;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+// This class displays the vending machine UI and contains no business logic.
 
 public class UI {
     ArrayList<Snack> snacks = new ArrayList<>(
@@ -146,6 +146,8 @@ public class UI {
             JOptionPane.showMessageDialog(null, "Unexpected Error occurred: " + e);
         }
     }
+
+// The admin menu can only be accessed by entering the passphrase in the buy Snack window.
 
     void AdminMenu() {
         while (true) {
