@@ -1,6 +1,23 @@
 # Verkaufsautomat Projekt
 
 ## Inhaltsverzeichniss
+- [Verkaufsautomat Projekt](#verkaufsautomat-projekt)
+  - [Inhaltsverzeichniss](#inhaltsverzeichniss)
+  - [Informieren](#informieren)
+    - [Anforderungen](#anforderungen)
+    - [Aufteilung des Programmes](#aufteilung-des-programmes)
+  - [Planen](#planen)
+    - [Aufgabeneinteilung](#aufgabeneinteilung)
+    - [DoD](#dod)
+  - [Entscheiden](#entscheiden)
+  - [Realisieren](#realisieren)
+  - [Kontrollieren](#kontrollieren)
+  - [Auswerten](#auswerten)
+    - [Fabian](#fabian)
+    - [Julian](#julian)
+    - [Liliane](#liliane)
+
+
 ## Informieren
 Um zu wissen, was wir machen müssen, ist es hilfreich eine Liste, aller Anforderungen zu haben:
 ### Anforderungen
