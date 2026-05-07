@@ -6,31 +6,22 @@ import java.util.List;
 // This class displays the vending machine UI and contains no business logic.
 
 public class UI {
-    ArrayList<Snack> snacks = new ArrayList<>(
-            List.of(
-                    new Snack("Monster energy Ultra", 2, 5.f),
-                    new Snack("Coca Cola", 10, 3.5f),
-                    new Snack("Eistee", 8, 3.5f),
-                    new Snack("Red bull", 6, 5.f),
-                    new Snack("Snickers", 13, 4.6f),
-                    new Snack("Bubble Gum",20,1.5f),
-                    new Snack("Chips", 6, 5f),
-                    new Snack("Wasser", 10, 3.5f),
-                    new Snack("Nüsse", 10, 4f)
-            )
-    );
+    List<Snack> snacks;
 
-    SnackInventory inventory = new SnackInventory(snacks);
-    SnackMachine snackMachine = new SnackMachine(inventory);
-    Customer customer = new Customer(snackMachine);
+    SnackInventory inventory ;
+    SnackMachine snackMachine ;
+    Customer customer;
 
-    void main(String[] args) {
-        while (Menu()) {
-        }
+    public UI(List<Snack> snacks){
+        this.snacks = snacks;
+        this.inventory = new SnackInventory(snacks);
+        this.snackMachine = new SnackMachine(inventory);
+        this.customer = new Customer(snackMachine);
     }
 
-    boolean Menu() {
-        String[] options = {"Show available Snacks", "Put money in machine", "buy snack", "exit"};
+    void Menu() {
+        while (true) {
+            String[] options = {"Show available Snacks", "Put money in machine", "buy snack", "exit"};
 
             int choice = JOptionPane.showOptionDialog(
                     null,
@@ -50,7 +41,7 @@ public class UI {
             } else if (choice == 2) {
                 buySnack();
             } else {
-                return;
+                break;
             }
         }
     }
@@ -101,7 +92,7 @@ public class UI {
             int id = Integer.parseInt(choice);
             Snack selectedSnack = inventory.getSnackById(id);
             customer.buySnack(selectedSnack);
-            JOptionPane.showMessageDialog(null, "Purchase successful!" + selectedSnack.getName());
+            JOptionPane.showMessageDialog(null, "Purchase successful! You now have " + customer.getMoney() + "$ and a " + selectedSnack.getName());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid Number.");
         } catch (IndexOutOfBoundsException e) {
@@ -183,7 +174,6 @@ public class UI {
             );
 
             Snack snack = inventory.getSnackById(Integer.parseInt(snackId));
-
 
             String newCount = JOptionPane.showInputDialog(
                     null,
