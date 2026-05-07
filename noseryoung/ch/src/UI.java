@@ -6,6 +6,43 @@ public class UI {
     static ArrayList<Snack> snacks = new ArrayList<>();
     static SnackInventory inventory = new SnackInventory(snacks);
 
+    public static void startingPage(String[] args) {
+
+        String[] options = {"Login", "Skip Login", "Exit"};
+
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                "Welcome! Do you want to Login or continue without?",
+                "Start",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+
+        switch (choice) {
+
+            case 0: // Login
+                if (login()) {
+                    JOptionPane.showMessageDialog(null, "Login successful!");
+                    Menue();
+                } else {
+                    startingPage(args);
+                }
+                break;
+
+            case 1: // Skip
+                JOptionPane.showMessageDialog(null, "Continuing without login");
+                Menue();
+                break;
+
+            default: // Exit or close window
+                JOptionPane.showMessageDialog(null, "Goodbye!");
+                System.exit(0);
+        }
+    }
+
     public static boolean login() {
         JPasswordField passwordField = new JPasswordField();
 
@@ -73,6 +110,19 @@ public class UI {
                 "Snack List",
                 JOptionPane.PLAIN_MESSAGE
         );
+
+        int choice = JOptionPane.showConfirmDialog(
+                null,
+                "Do you want to return to buy?",
+                "Return to Menu",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (choice == JOptionPane.YES_OPTION) {
+            buySnack();
+        } else {
+            Menue();
+        }
     }
 
      public static void buySnack(){
