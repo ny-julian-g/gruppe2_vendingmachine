@@ -3,58 +3,52 @@ import exceptions.NotEnoughMoneyException;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 public class UI {
-    ArrayList<Snack> snacks = new ArrayList<>(
-            List.of(
-                    new Snack("Monster energy Ultra", 2, 8),
-                    new Snack("Coca Cola", 10, 3.5f),
-                    new Snack("Eistee", 8, 3.5f),
-                    new Snack("Red bull", 6, 5.f),
-                    new Snack("Snickers", 13, 4.6f)
-            )
-    );
+    List<Snack> snacks;
 
-    SnackInventory inventory = new SnackInventory(snacks);
-    SnackMachine snackMachine = new SnackMachine(inventory);
-    Customer customer = new Customer(snackMachine);
+    SnackInventory inventory;
+    SnackMachine snackMachine;
+    Customer customer;
 
-    void main(String[] args) {
-        while (Menu()) {
-        }
+    public UI(List<Snack> snacks){
+        this.snacks = snacks;
+        this.inventory = new SnackInventory(snacks);
+        this.snackMachine = new SnackMachine(inventory);
+        this.customer = new Customer(snackMachine);
     }
 
-    boolean Menu() {
-        String[] options = {"Show available Snacks", "Put money in machine", "buy snack", "exit"};
+    void Menu() {
+        while (true) {
+            String[] options = {"Show available Snacks", "Put money in machine", "buy snack", "exit"};
 
-        int choice = JOptionPane.showOptionDialog(
-                null,
-                "Choose action:",
-                "Menu",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[0]
-        );
+            int choice = JOptionPane.showOptionDialog(
+                    null,
+                    "Choose action:",
+                    "Menu",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]
+            );
 
-        if (choice == 0) {
-            showSnacks();
-        } else if (choice == 1) {
-            putMoneyInMachine();
-        } else if (choice == 2) {
-            buySnack();
-        } else {
-            return false;
+            if (choice == 0) {
+                showSnacks();
+            } else if (choice == 1) {
+                putMoneyInMachine();
+            } else if (choice == 2) {
+                buySnack();
+            } else {
+                return;
+            }
         }
-        return true;
     }
 
     void showSnacks() {
 
-        List<Snack> snacks = customer.getAvailableSnacks();
+        List<Snack> snacks = inventory.getAvailableSnacks();
 
         StringBuilder text = new StringBuilder("Available snacks:\n\n");
 
@@ -72,21 +66,9 @@ public class UI {
                 "Snack List",
                 JOptionPane.PLAIN_MESSAGE
         );
-
     }
 
     void buySnack() {
-        List<Snack> availableSnacks = customer.getAvailableSnacks();
-
-        if (availableSnacks == null || availableSnacks.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No snacks available.");
-            return;
-        }
-
-        String[] options = availableSnacks.stream()
-                .map(Snack::toString)
-                .toArray(String[]::new);
-
         String choice = JOptionPane.showInputDialog(
                 null,
                 "Please enter the snack ID. there are " + snackMachine.getMoney() + "$ in the machine",
@@ -108,15 +90,16 @@ public class UI {
         }
         try {
             int id = Integer.parseInt(choice);
-            Snack selectedSnack = availableSnacks.get(id);
+            Snack selectedSnack = inventory.getSnackById(id);
             customer.buySnack(selectedSnack);
-            JOptionPane.showMessageDialog(null, "Purchase successful!" + selectedSnack.getName());
+            JOptionPane.showMessageDialog(null, "Purchase successful! you now have " + customer.getMoney() + "$ and a " + selectedSnack.getName());
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid Number.");
         } catch (IndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Option is not available :(");
         } catch (NotEnoughMoneyException e) {
-            JOptionPane.showMessageDialog(null, "Not enough money :(");
+            JOptionPane.showMessageDialog(null, "Not enough money in the machine :(");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Unexpected Error occurred: " + e);
         }
@@ -148,8 +131,9 @@ public class UI {
 
             String[] options = {
                     "Change Snack",
-                    "restore Snack",
-                    "set Price",
+                    "Restock all Snacks",
+                    "Restock Snack",
+                    "set Snack Price",
                     "Exit Admin Mode"
             };
 
@@ -167,63 +151,68 @@ public class UI {
             if (choice == 0) {
                 changeSnackUI();
             } else if (choice == 1) {
-                restockSnacksUI();
+                restockAllSnacksUI();
             } else if (choice == 2) {
-                setPriceUI();
+                restockSnackUI();
             } else if (choice == 3) {
+                setPriceUI();
+            } else {
                 return;
             }
         }
     }
 
-    void restockSnacksUI() {
-
-        List<Snack> snacks = customer.getAvailableSnacks();
-
-        if (snacks.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No snacks available.");
-            return;
-        }
-
+    private void restockSnackUI() {
         try {
 
-            List<Integer> amounts = new ArrayList<>();
+            String snackId = JOptionPane.showInputDialog(
+                    null,
+                    "enter ID of snack to restock",
+                    "Restock Snack",
+                    JOptionPane.QUESTION_MESSAGE
+            );
 
-            for (Snack snack : snacks) {
+            Snack snack = inventory.getSnackById(Integer.parseInt(snackId));
 
-                String input = JOptionPane.showInputDialog(
-                        null,
-                        "Enter new stock for: " + snack.getName() + " (Leave empty to keep " + snack.getCount() + ")",
-                        "Restock",
-                        JOptionPane.QUESTION_MESSAGE
-                );
-                if (input == null) return;
-                if (input.trim().isEmpty()) amounts.add(snack.getCount());
-                else amounts.add(Integer.parseInt(input.trim()));
-            }
-            customer.restockSnacks(Optional.of(amounts));
+
+            String newCount = JOptionPane.showInputDialog(
+                    null,
+                    "enter new amount of the snack",
+                    "Restock Snack",
+                    JOptionPane.QUESTION_MESSAGE
+            );
+
+            snack.setCount(Integer.parseInt(newCount));
+
 
             JOptionPane.showMessageDialog(
                     null,
-                    "Snacks restocked successfully!"
+                    "Snack restocked!"
             );
-
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid number.");
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Snack does not exist");
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
-    void setPriceUI() {
+    void restockAllSnacksUI() {
+        try{
+            inventory.restockAllSnacks();
 
-        List<Snack> snacks = customer.getAvailableSnacks();
-
-        if (snacks.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No snacks available.");
-            return;
+            JOptionPane.showMessageDialog(
+                    null,
+                    "All snacks restocked!"
+            );
         }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Unexpected exception occurred: " + e.getMessage());
+        }
+    }
 
+    void setPriceUI() {
         try {
 
             String idInput = JOptionPane.showInputDialog(
@@ -233,7 +222,7 @@ public class UI {
             if (idInput == null) return;
             int id = Integer.parseInt(idInput);
 
-            Snack selectedSnack = snacks.get(id);
+            Snack selectedSnack = inventory.getSnackById(id);
 
             String priceInput = JOptionPane.showInputDialog(
                     null,
@@ -245,7 +234,7 @@ public class UI {
             if (priceInput.trim().isEmpty()) newPrice = selectedSnack.getPrice();
             else newPrice = Float.parseFloat(priceInput);
 
-            customer.setPrice(selectedSnack, newPrice);
+            selectedSnack.setPrice(newPrice);
 
             JOptionPane.showMessageDialog(
                     null,
@@ -262,14 +251,6 @@ public class UI {
     }
 
     void changeSnackUI() {
-
-        List<Snack> availableSnacks = customer.getAvailableSnacks();
-
-        if (availableSnacks.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No snacks available.");
-            return;
-        }
-
         try {
 
             String idInput = JOptionPane.showInputDialog(
@@ -279,7 +260,7 @@ public class UI {
             if (idInput == null) return;
             int id = Integer.parseInt(idInput);
 
-            Snack oldSnack = availableSnacks.get(id);
+            Snack snack = inventory.getSnackById(id);
 
             String newName = JOptionPane.showInputDialog(
                     null,
@@ -300,14 +281,10 @@ public class UI {
             );
             if (input == null) return;
             float newPrice = Float.parseFloat(input);
-            input = null;
 
-            customer.changeSnack(
-                    oldSnack,
-                    newName,
-                    newCount,
-                    newPrice
-            );
+            snack.setPrice(newPrice);
+            snack.setCount(newCount);
+            snack.setName(newName);
 
             JOptionPane.showMessageDialog(
                     null,

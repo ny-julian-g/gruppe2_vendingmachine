@@ -37,20 +37,4 @@ public class Customer {
     public float getMoney() {
         return money;
     }
-
-    public List<Snack> getAvailableSnacks() {
-        return snackMachine.getAvailableSnacks();
-    }
-
-    public void restockSnacks(Optional<List<Integer>> values) {
-        snackMachine.restockSnacks(values);
-    }
-
-    public void setPrice(Snack snack, float price) {
-        snackMachine.setPrice(snack, price);
-    }
-
-    public void changeSnack(Snack oldSnack, String name, int count, float price) {
-        snackMachine.changeSnack(oldSnack, name, count, price);
-    }
 }
