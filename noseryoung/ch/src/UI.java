@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class UI {
     ArrayList<Snack> snacks = new ArrayList<>(
             List.of(
@@ -23,7 +22,8 @@ public class UI {
     Customer customer = new Customer(snackMachine);
 
     void main(String[] args) {
-        while (Menu()) {}
+        while (Menu()) {
+        }
     }
 
     boolean Menu() {

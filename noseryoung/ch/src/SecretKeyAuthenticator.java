@@ -1,6 +1,8 @@
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import java.io.*;
+import java.io.Console;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -9,14 +11,15 @@ import java.util.Scanner;
 
 
 /**
-* Provides a static method to check whether a given password is correct and matches
-* the hash in `pwd.bin`.
-* */
+ * Provides a static method to check whether a given password is correct and matches
+ * the hash in `pwd.bin`.
+ *
+ */
 public class SecretKeyAuthenticator {
 
     private static final int iterations = 600000;
     private static final int hashLengthBytes = 32;
-    private static final int saltLengthBytes = 16 ;
+    private static final int saltLengthBytes = 16;
     private static final String pwdHashFilePath = "pwd.bin";
 
     private static byte[] hashPassphrase(char[] pwd, byte[] salt) {
@@ -63,7 +66,7 @@ public class SecretKeyAuthenticator {
         }
     }
 
-    public static char[] getPassphrase(){
+    public static char[] getPassphrase() {
         char[] pwd;
         Console console = System.console();
 
@@ -80,18 +83,19 @@ public class SecretKeyAuthenticator {
     }
 
     /**
-    * checks if a passphrase is correct
-    * @return boolean whether the password is correct
-    *  */
+     * checks if a passphrase is correct
+     *
+     * @return boolean whether the password is correct
+     *
+     */
     public static boolean authenticatePassphrase(char[] pwd) {
         byte[] fileSalt = new byte[saltLengthBytes];
         byte[] fileHash = new byte[hashLengthBytes];
 
-        try (FileInputStream reader = new FileInputStream(pwdHashFilePath)){
+        try (FileInputStream reader = new FileInputStream(pwdHashFilePath)) {
             reader.read(fileSalt);
             reader.read(fileHash);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
 

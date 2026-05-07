@@ -4,36 +4,39 @@ import java.util.List;
 import java.util.Optional;
 
 /**
-* this class manages the money the customer has.
-* you can put money into the snack machine, get a snack
-* and cancel midway.
-* */
+ * this class manages the money the customer has.
+ * you can put money into the snack machine, get a snack
+ * and cancel midway.
+ *
+ */
 public class Customer {
     private float money = 100.f;
     SnackMachine snackMachine;
 
-    public Customer(SnackMachine snackMachine){
+    public Customer(SnackMachine snackMachine) {
         this.snackMachine = snackMachine;
     }
 
-    public void putMoneyIntoMachine(float amount){
-        if (amount > money){
+    public void putMoneyIntoMachine(float amount) {
+        if (amount > money) {
             throw new NotEnoughMoneyException("Not enough money :(");
         }
         snackMachine.addMoney(amount);
         money -= amount;
     }
 
-    public void buySnack(Snack snack){
+    public void buySnack(Snack snack) {
         snackMachine.buySnack(snack);
         money += snackMachine.refundLeftoverMoney();
     }
 
-    public void cancel(){
+    public void cancel() {
         money += snackMachine.refundLeftoverMoney();
     }
 
-    public float getMoney(){ return money; }
+    public float getMoney() {
+        return money;
+    }
 
     public List<Snack> getAvailableSnacks() {
         return snackMachine.getAvailableSnacks();
