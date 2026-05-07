@@ -51,6 +51,7 @@ public class UI {
     }
 
     void showSnacks() {
+
         List<Snack> snacks = customer.getAvailableSnacks();
 
         StringBuilder text = new StringBuilder("Available snacks:\n\n");
@@ -94,7 +95,6 @@ public class UI {
         if(choice == null){
             return;
         }
-
         if (choice.equals("-1")) {
             JOptionPane.showMessageDialog(null, "Cancelled");
         }
@@ -113,8 +113,20 @@ public class UI {
             customer.buySnack(selectedSnack);
             JOptionPane.showMessageDialog(null, "Purchase successful! " + selectedSnack.getName() );
         }
+        catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Please enter a valid number");
+        }
+        catch (IndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(null, "Option is not available :(");
+        }
+        catch (IllegalStateException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
         catch (NotEnoughMoneyException e) {
-            JOptionPane.showMessageDialog(null, "Not enough money :(");
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, "unexpected Error occurred: " + e);
         }
     }
 
@@ -131,8 +143,14 @@ public class UI {
 
             JOptionPane.showMessageDialog(null, "success");
         }
-        catch (NotEnoughMoneyException e){
-            JOptionPane.showMessageDialog(null, "Not enough money :(");
+        catch (NotEnoughMoneyException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Please just enter plain numbers");
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Unexpected Error occurred:" + e);
         }
     }
 

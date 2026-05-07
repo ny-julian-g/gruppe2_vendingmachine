@@ -31,9 +31,10 @@ public class SnackMachine {
             throw new NotEnoughMoneyException("not enough money");
         }
 
-        snackInventory.getSnack(snack);
+       if(snackInventory.getSnack(snack).isEmpty())throw new IllegalStateException("Snack is unavailable");
         money -= snackInventory.getPrice(snack);
     }
+
     public List<Snack> getAvailableSnacks() {
         return snackInventory.getAvailableSnacks();
     }

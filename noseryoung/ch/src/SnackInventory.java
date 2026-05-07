@@ -7,7 +7,7 @@ import java.util.Optional;
  * How to use this Class:
  *
  * !Important!
- * No Function ever returns null! Either it returns an empty List,
+ * No Function ever returns null! Either it returns an empty List or
  * an empty optional field, that should be handled safely to avoid a:
  * "NoSuchElementException". A Function that returns void, will be able to throw
  * an exception.
@@ -52,7 +52,6 @@ public class SnackInventory {
                 } else return Optional.empty();
             }
         }
-        System.out.println("No Snack found");
         return Optional.empty();
     }
 

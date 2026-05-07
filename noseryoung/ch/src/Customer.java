@@ -18,7 +18,7 @@ public class Customer {
 
     public void putMoneyIntoMachine(float amount){
         if (amount > money){
-            throw new NotEnoughMoneyException("not enough money");
+            throw new NotEnoughMoneyException("Not enough money :(");
         }
         snackMachine.addMoney(amount);
         money -= amount;
