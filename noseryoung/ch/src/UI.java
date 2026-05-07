@@ -5,10 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
+
 public class UI {
     ArrayList<Snack> snacks = new ArrayList<>(
             List.of(
-                    new Snack("white monster", 100, 8)
+                    new Snack("Monster energy Ultra", 2, 8),
+                    new Snack("Coca Cola", 10, 3.5f),
+                    new Snack("Eistee", 8, 3.5f),
+                    new Snack("Red bull", 6, 5.f),
+                    new Snack("Snickers", 13, 4.6f)
             )
     );
 
@@ -17,8 +23,7 @@ public class UI {
     Customer customer = new Customer(snackMachine);
 
     void main(String[] args) {
-        while (Menu()) {
-        }
+        while (Menu()) {}
     }
 
     boolean Menu() {

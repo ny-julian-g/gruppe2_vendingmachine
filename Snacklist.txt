@@ -12,3 +12,6 @@ Snackautomat - Snackliste
 - Snickers
 	- ID: 4
 	- 4.60 Fr.
+- White monster
+    - ID: 5
+    - 5.0 Fr
