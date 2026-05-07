@@ -24,8 +24,11 @@ public class Snack {
         return count;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setCount(int newCount) {
+        if (count < 0){
+            throw new IllegalArgumentException("count must be a positive integer");
+        }
+        count = newCount;
     }
 
     public String getName() {
@@ -33,6 +36,9 @@ public class Snack {
     }
 
     public void setName(String name) {
+        if (name == null || name.isEmpty()){
+            throw new IllegalArgumentException("name cannot be null");
+        }
         this.name = name;
     }
 
@@ -41,6 +47,9 @@ public class Snack {
     }
 
     public void setPrice(float price) {
+        if (price < 0.f){
+            throw new IllegalArgumentException("price must be positive");
+        }
         this.price = price;
     }
 
@@ -56,4 +65,7 @@ public class Snack {
         return id;
     }
 
+    public boolean isAvailable(){
+        return count > 0;
+    }
 }
