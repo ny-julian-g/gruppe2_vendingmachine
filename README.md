@@ -1,13 +1,12 @@
-# Vending maschine Projekt
+# Vendingmaschine Projekt
 
 ## Inhaltsverzeichniss
-
 ## Informieren
 Um zu wissen, was wir machen müssen, ist es hilfreich eine Liste, aller Anforderungen zu haben:
 ### Anforderungen
 - [ ] Vorgehensweise nach IPERKA
 - [ ] Wichtigsten Schritte in Dokumentation festhalten (inkl. schöne Formatierung)
-- [ ] Code auf GitHub abgelegt
+- [x] Code auf GitHub abgelegt
 - [x] Teammitglieder und Berufsbildner eingeladen
 - [ ] Programm gemäss Auftrag realisieren (weiter ausgeführt in DoD)
 
@@ -21,10 +20,10 @@ Aufteilung gemäss UML
 ## Planen
 ### Aufgabeneinteilung
 SecretKeyAuthenticator -> Fabian
-UI/Design -> Liliane
-Inventory -> Julian
-Snack -> Julian + Fabian
-SnackMachine -> Fabian
+UI/Design -> Liliane,
+Inventory -> Julian,
+Snack -> Julian + Fabian,
+SnackMachine -> Fabian,
 Customer -> Fabian
 
 wir haben folgendes UML zu dem ganzen erstellt
@@ -32,8 +31,9 @@ wir haben folgendes UML zu dem ganzen erstellt
 ### DoD
 Um später zu kontrollieren, ob wir das Projekt abgeschlossen haben, definieren wir hier folgende Anforderungen:
 
-- [ ] Anforderungen in Planen-Teil erfüllt
-- [ ] Programm läuft wie in Auftrag definiert
+- [ ] Anforderungen in Informieren-Teil erfüllt
+- [ ] Programm läuft wie in [Auftrag](./Anforderungen.md) definiert
+- [ ] Alle User-Eingaben sind absturzsicher.
 
 
 ## Entscheiden
@@ -50,7 +50,12 @@ enthält. Dies ist kryptographisch sicher, und man kann mit dem inhalt der datei
 überprüfen, ob ein passwort korrekt ist.
 
 Wir haben implementiert, dass beim UI die normalen aktionen (snack kaufen) durch den UI -> Customer ->
-SnackMachine -> SnackInventory fliessen, was die logik einfacehr macht. Aber bei den Admin-funktionen
+SnackMachine -> SnackInventory fliessen, was die logik einfacher macht und das EVA-Prinzip umsetzt. Aber bei den Admin-funktionen
 geht es von UI direkt zum Inventory, da diese keine logik enthalten.
+
+Jegliche falschen Eingaben werden überprüft und mit einer Exception gehandelt, die im Frontend angezeigt wird. Dadurch konnten wir unser Programm "idiotensicher" machen und Abstürze verhindern. 
   
 ## Kontrollieren
+
+
+## Auswerten
