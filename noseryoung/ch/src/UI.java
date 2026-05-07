@@ -1,27 +1,36 @@
 import exceptions.NotEnoughMoneyException;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// This class displays the vending machine UI and contains no business logic.
 
 public class UI {
-    List<Snack> snacks;
+    ArrayList<Snack> snacks = new ArrayList<>(
+            List.of(
+                    new Snack("Monster energy Ultra", 2, 5.f),
+                    new Snack("Coca Cola", 10, 3.5f),
+                    new Snack("Eistee", 8, 3.5f),
+                    new Snack("Red bull", 6, 5.f),
+                    new Snack("Snickers", 13, 4.6f),
+                    new Snack("Bubble Gum",20,1.5f),
+                    new Snack("Chips", 6, 5f),
+                    new Snack("Wasser", 10, 3.5f),
+                    new Snack("Nüsse", 10, 4f)
+            )
+    );
 
-    SnackInventory inventory;
-    SnackMachine snackMachine;
-    Customer customer;
+    SnackInventory inventory = new SnackInventory(snacks);
+    SnackMachine snackMachine = new SnackMachine(inventory);
+    Customer customer = new Customer(snackMachine);
 
-    public UI(List<Snack> snacks){
-        this.snacks = snacks;
-        this.inventory = new SnackInventory(snacks);
-        this.snackMachine = new SnackMachine(inventory);
-        this.customer = new Customer(snackMachine);
+    void main(String[] args) {
+        while (Menu()) {
+        }
     }
 
-    void Menu() {
-        while (true) {
-            String[] options = {"Show available Snacks", "Put money in machine", "buy snack", "exit"};
+    boolean Menu() {
+        String[] options = {"Show available Snacks", "Put money in machine", "buy snack", "exit"};
 
             int choice = JOptionPane.showOptionDialog(
                     null,
@@ -71,7 +80,7 @@ public class UI {
     void buySnack() {
         String choice = JOptionPane.showInputDialog(
                 null,
-                "Please enter the snack ID. there are " + snackMachine.getMoney() + "$ in the machine",
+                "Please enter the snack ID. There are " + snackMachine.getMoney() + "$ in the machine",
                 "Buy Snack",
                 JOptionPane.PLAIN_MESSAGE
         );
@@ -92,8 +101,7 @@ public class UI {
             int id = Integer.parseInt(choice);
             Snack selectedSnack = inventory.getSnackById(id);
             customer.buySnack(selectedSnack);
-            JOptionPane.showMessageDialog(null, "Purchase successful! you now have " + customer.getMoney() + "$ and a " + selectedSnack.getName());
-
+            JOptionPane.showMessageDialog(null, "Purchase successful!" + selectedSnack.getName());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid Number.");
         } catch (IndexOutOfBoundsException e) {
@@ -108,8 +116,8 @@ public class UI {
     void putMoneyInMachine() {
         String choice = JOptionPane.showInputDialog(
                 null,
-                "Enter the amount of money to put in the machine. you have " + customer.getMoney() + "$",
-                "put money in machine",
+                "Enter the amount of money to put in the machine. You have " + customer.getMoney() + "$ available",
+                "put money in the machine",
                 JOptionPane.PLAIN_MESSAGE
         );
         if (choice == null) return;
@@ -122,9 +130,11 @@ public class UI {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Please just enter plain numbers");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Unexpected Error occurred:" + e);
+            JOptionPane.showMessageDialog(null, "Unexpected Error occurred: " + e);
         }
     }
+
+// The admin menu can only be accessed by entering the passphrase in the buy Snack window.
 
     void AdminMenu() {
         while (true) {
@@ -217,7 +227,7 @@ public class UI {
 
             String idInput = JOptionPane.showInputDialog(
                     null,
-                    "Enter snack ID:"
+                    "Enter snack ID: "
             );
             if (idInput == null) return;
             int id = Integer.parseInt(idInput);
@@ -226,7 +236,7 @@ public class UI {
 
             String priceInput = JOptionPane.showInputDialog(
                     null,
-                    "Enter new price:"
+                    "Enter new price: "
             );
             if (priceInput == null) return;
             float newPrice;
@@ -255,7 +265,7 @@ public class UI {
 
             String idInput = JOptionPane.showInputDialog(
                     null,
-                    "Enter snack ID to change:"
+                    "Enter snack ID to change: "
             );
             if (idInput == null) return;
             int id = Integer.parseInt(idInput);
@@ -264,12 +274,12 @@ public class UI {
 
             String newName = JOptionPane.showInputDialog(
                     null,
-                    "Enter new name:"
+                    "Enter new name: "
             );
 
             String input = JOptionPane.showInputDialog(
                     null,
-                    "Enter new count:"
+                    "Enter new count: "
             );
             if (input == null) return;
             int newCount = Integer.parseInt(input);
@@ -277,7 +287,7 @@ public class UI {
 
             input = JOptionPane.showInputDialog(
                     null,
-                    "Enter new price:"
+                    "Enter new price: "
             );
             if (input == null) return;
             float newPrice = Float.parseFloat(input);
