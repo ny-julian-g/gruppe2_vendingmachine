@@ -87,16 +87,13 @@ public class UI {
 
         String choice = JOptionPane.showInputDialog(
                 null,
-                "Please enter the snack ID, enter -1 to cancel. there are " + snackMachine.getMoney()  + "$ in the machine",
+                "Please enter the snack ID. there are " + snackMachine.getMoney()  + "$ in the machine",
                 "Buy Snack",
                 JOptionPane.PLAIN_MESSAGE
         );
 
         if(choice == null){
             return;
-        }
-        if (choice.equals("-1")) {
-            JOptionPane.showMessageDialog(null, "Cancelled");
         }
 
          if (SecretKeyAuthenticator.authenticatePassphrase(choice.toCharArray())) {
