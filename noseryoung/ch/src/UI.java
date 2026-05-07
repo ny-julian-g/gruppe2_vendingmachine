@@ -110,17 +110,15 @@ public class UI {
             int id = Integer.parseInt(choice);
             Snack selectedSnack = availableSnacks.get(id);
             customer.buySnack(selectedSnack);
-            JOptionPane.showMessageDialog(null, "Purchase successful! " + selectedSnack.getName());
+            JOptionPane.showMessageDialog(null, "Purchase successful!" + selectedSnack.getName());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Please enter a valid number");
+            JOptionPane.showMessageDialog(null, "Invalid Number.");
         } catch (IndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Option is not available :(");
-        } catch (IllegalStateException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
         } catch (NotEnoughMoneyException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, "Not enough money :(");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "unexpected Error occurred: " + e);
+            JOptionPane.showMessageDialog(null, "Unexpected Error occurred: " + e);
         }
     }
 
@@ -135,9 +133,9 @@ public class UI {
         try {
             customer.putMoneyIntoMachine(Integer.parseInt(choice));
 
-            JOptionPane.showMessageDialog(null, "success");
+            JOptionPane.showMessageDialog(null, "Success");
         } catch (NotEnoughMoneyException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, "Not enough Money :(");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Please just enter plain numbers");
         } catch (Exception e) {
