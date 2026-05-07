@@ -31,7 +31,7 @@ public class UI {
     }
 
     boolean Menu() {
-        String[] options = {"Show available Snacks", "Put money in machine", "buy snack", "exit"};
+        String[] options = {"Show available Snacks", "Put money in the machine", "buy snack", "exit"};
 
         int choice = JOptionPane.showOptionDialog(
                 null,
@@ -93,7 +93,7 @@ public class UI {
 
         String choice = JOptionPane.showInputDialog(
                 null,
-                "Please enter the snack ID. there are " + snackMachine.getMoney() + "$ in the machine",
+                "Please enter the snack ID. There are " + snackMachine.getMoney() + "$ in the machine",
                 "Buy Snack",
                 JOptionPane.PLAIN_MESSAGE
         );
@@ -114,7 +114,7 @@ public class UI {
             int id = Integer.parseInt(choice);
             Snack selectedSnack = availableSnacks.get(id);
             customer.buySnack(selectedSnack);
-            JOptionPane.showMessageDialog(null, "Purchase successful!" + selectedSnack.getName());
+            JOptionPane.showMessageDialog(null, "Purchase successful! " + selectedSnack.getName());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid Number.");
         } catch (IndexOutOfBoundsException e) {
@@ -129,8 +129,8 @@ public class UI {
     void putMoneyInMachine() {
         String choice = JOptionPane.showInputDialog(
                 null,
-                "Enter the amount of money to put in the machine. you have " + customer.getMoney() + "$",
-                "put money in machine",
+                "Enter the amount of money to put in the machine. You have " + customer.getMoney() + "$ available",
+                "put money in the machine",
                 JOptionPane.PLAIN_MESSAGE
         );
         if (choice == null) return;
@@ -143,7 +143,7 @@ public class UI {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Please just enter plain numbers");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Unexpected Error occurred:" + e);
+            JOptionPane.showMessageDialog(null, "Unexpected Error occurred: " + e);
         }
     }
 
@@ -232,7 +232,7 @@ public class UI {
 
             String idInput = JOptionPane.showInputDialog(
                     null,
-                    "Enter snack ID:"
+                    "Enter snack ID: "
             );
             if (idInput == null) return;
             int id = Integer.parseInt(idInput);
@@ -241,7 +241,7 @@ public class UI {
 
             String priceInput = JOptionPane.showInputDialog(
                     null,
-                    "Enter new price:"
+                    "Enter new price: "
             );
             if (priceInput == null) return;
             float newPrice;
@@ -278,7 +278,7 @@ public class UI {
 
             String idInput = JOptionPane.showInputDialog(
                     null,
-                    "Enter snack ID to change:"
+                    "Enter snack ID to change: "
             );
             if (idInput == null) return;
             int id = Integer.parseInt(idInput);
@@ -287,12 +287,12 @@ public class UI {
 
             String newName = JOptionPane.showInputDialog(
                     null,
-                    "Enter new name:"
+                    "Enter new name: "
             );
 
             String input = JOptionPane.showInputDialog(
                     null,
-                    "Enter new count:"
+                    "Enter new count: "
             );
             if (input == null) return;
             int newCount = Integer.parseInt(input);
@@ -300,7 +300,7 @@ public class UI {
 
             input = JOptionPane.showInputDialog(
                     null,
-                    "Enter new price:"
+                    "Enter new price: "
             );
             if (input == null) return;
             float newPrice = Float.parseFloat(input);
