@@ -1,6 +1,8 @@
 import exceptions.NotEnoughMoneyException;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -77,49 +79,25 @@ public class UI {
 
     void buySnack() {
         List<Snack> availableSnacks = customer.getAvailableSnacks();
+        if (availableSnacks.isEmpty()) return;
 
-        if (availableSnacks == null || availableSnacks.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No snacks available.");
-            return;
-        }
+        Optional<String> input = NumpadDialog.show("Enter Snack ID");
 
-        String[] options = availableSnacks.stream()
-                .map(Snack::toString)
-                .toArray(String[]::new);
+        input.ifPresent(choice -> {
+            if (SecretKeyAuthenticator.authenticatePassphrase(choice.toCharArray())) {
+                AdminMenu();
+                return;
+            }
 
-        String choice = JOptionPane.showInputDialog(
-                null,
-                "Please enter the snack ID. there are " + snackMachine.getMoney() + "$ in the machine",
-                "Buy Snack",
-                JOptionPane.PLAIN_MESSAGE
-        );
-
-        if (choice == null) {
-            return;
-        }
-
-        if (SecretKeyAuthenticator.authenticatePassphrase(choice.toCharArray())) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Admin access granted!"
-            );
-            AdminMenu();
-            return;
-        }
-        try {
-            int id = Integer.parseInt(choice);
-            Snack selectedSnack = availableSnacks.get(id);
-            customer.buySnack(selectedSnack);
-            JOptionPane.showMessageDialog(null, "Purchase successful!" + selectedSnack.getName());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Invalid Number.");
-        } catch (IndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Option is not available :(");
-        } catch (NotEnoughMoneyException e) {
-            JOptionPane.showMessageDialog(null, "Not enough money :(");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Unexpected Error occurred: " + e);
-        }
+            try {
+                int id = Integer.parseInt(choice);
+                Snack selectedSnack = availableSnacks.get(id);
+                customer.buySnack(selectedSnack);
+                JOptionPane.showMessageDialog(null, "Enjoy your " + selectedSnack.getName() + "!");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            }
+        });
     }
 
     void putMoneyInMachine() {
