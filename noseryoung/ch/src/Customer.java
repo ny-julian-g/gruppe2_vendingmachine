@@ -43,7 +43,7 @@ public class Customer {
         snackMachine.restockSnacks(values);
     }
 
-    public void setPrice(Snack snack, int price) {
+    public void setPrice(Snack snack, float price) {
         snackMachine.setPrice(snack, price);
     }
 

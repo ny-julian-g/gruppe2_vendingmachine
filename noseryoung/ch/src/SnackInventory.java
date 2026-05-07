@@ -96,7 +96,7 @@ public class SnackInventory {
     }
 
     //setPrice (exception): You can set a new price for a snack
-    public void setPrice(Snack snack, int price){
+    public void setPrice(Snack snack, float price){
         if (snacks.isEmpty()) throw new IllegalArgumentException("No Snacks available");
         if (price < 0) throw new IllegalArgumentException("Price can't be lower than zero(0)");
         boolean isInexistent = true;

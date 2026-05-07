@@ -137,7 +137,7 @@ public class UI {
                 "put money in machine",
                 JOptionPane.PLAIN_MESSAGE
         );
-
+        if (choice == null)return;
         try{
             customer.putMoneyIntoMachine(Integer.parseInt(choice));
 
@@ -187,7 +187,7 @@ public class UI {
             AdminMenu();
         }
         else if (choice == 3) {
-            Menu();
+            return;
         }
     }
 
@@ -208,12 +208,14 @@ public class UI {
 
                 String input = JOptionPane.showInputDialog(
                         null,
-                        "Enter new stock for: " + snack.getName()
+                        "Enter new stock for: " + snack.getName() + " (Leave empty to keep " + snack.getCount() + ")",
+                        "Restock",
+                        JOptionPane.QUESTION_MESSAGE
                 );
-
-                amounts.add(Integer.parseInt(input));
+                if (input == null) return;
+                if(input.trim().isEmpty()) amounts.add(snack.getCount());
+                else amounts.add(Integer.parseInt(input.trim()));
             }
-
             customer.restockSnacks(Optional.of(amounts));
 
             JOptionPane.showMessageDialog(
@@ -245,7 +247,7 @@ public class UI {
                     null,
                     "Enter snack ID:"
             );
-
+            if (idInput == null) return;
             int id = Integer.parseInt(idInput);
 
             Snack selectedSnack = snacks.get(id);
@@ -254,8 +256,11 @@ public class UI {
                     null,
                     "Enter new price:"
             );
+            if (priceInput == null) return;
+            float newPrice;
 
-            int newPrice = Integer.parseInt(priceInput);
+            if(priceInput.trim().isEmpty()) newPrice =  selectedSnack.getPrice();
+            else  newPrice = Float.parseFloat(priceInput);
 
             customer.setPrice(selectedSnack, newPrice);
 
@@ -291,7 +296,7 @@ public class UI {
                     null,
                     "Enter snack ID to change:"
             );
-
+            if (idInput == null)return;
             int id = Integer.parseInt(idInput);
 
             Snack oldSnack = availableSnacks.get(id);

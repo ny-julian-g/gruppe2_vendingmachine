@@ -47,7 +47,7 @@ public class SnackMachine {
         snackInventory.restockSnacks(values);
     }
 
-    public void setPrice(Snack snack, int price) {
+    public void setPrice(Snack snack, float price) {
         snackInventory.setPrice(snack, price);
     }
 
