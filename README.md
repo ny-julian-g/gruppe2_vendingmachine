@@ -80,6 +80,11 @@ konnten wir unser Programm "idiotensicher" machen und Abstürze verhindern.
 Die Auswertung haben wir jeweils individuell geschrieben, um verschiedene Meinungen und Ansichten miteinzubeziehen.
 
 ### Fabian
+Ich finde das Projekt lief sehr gut. Die Teamarbeit funktionierte auch überraschenderweise gut und wir hatten
+nie konflikte. Ich auch überrascht wie viele commits es hatte. Da es keine einzelarbeit ist, muss man
+auch kleine änderungen commiten. Ich habe viel gelernt über UI (Swing) In Java. Ich fand das arbeiten mit
+kommentaren für dokumentation auch gut. Manchmal hatte es fast zu viele kommentare, aber allgemein hat es mit sicher
+geholfen den code zu verstehen.
 
 ### Julian
 Ich fand es gut, dass wir uns am Anfang gedanken gemacht haben, wie wir das Projekt aufbauen wollen und wer was macht, damit
