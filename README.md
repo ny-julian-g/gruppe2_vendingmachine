@@ -19,6 +19,7 @@ Aufteilung gemäss UML
 - SecretKeyAuthenticator
 
 ## Planen
+### Aufgabeneinteilung
 SecretKeyAuthenticator -> Fabian
 UI/Design -> Liliane
 Inventory -> Julian
