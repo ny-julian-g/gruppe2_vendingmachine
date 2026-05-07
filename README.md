@@ -57,9 +57,11 @@ Jegliche falschen Eingaben werden überprüft und mit einer Exception gehandelt,
 
 
 ## Auswerten
+Die Auswertung haben wir jeweils individuell geschrieben, um verschiedene Meinungen und Ansichten miteinzubeziehen.
 
 ### Fabian
 
 ### Julian
+Ich fand es gut, dass wir uns am Anfang gedanken gemacht haben, wie wir das Projekt aufbauen wollen und wer was macht, damit legten wir die Grundsteine für die anschliessende Arbeit. Dabei wäre es jedoch besser gewesen, genauer zu definieren, welche elementaren Funktionen wir brauchen, um das Programm laufen zu lassen, das hätte direkt eine saubere abtrennung der Logik und dem UI nach dem EVA-Prinzip ermöglicht. Ausserdem hätte ich es im nachhinein sinnvoll gefunden, einen dev Branch zu machen, wobei dieser ebenfalls feature Branches haben würde, um eine saubere Entwicklung zu ermöglichen, wobei wir es bei unserem Fall nicht zwingend brauchten. Allgemein fand ich, dass wir ein gutes Zusammenspiel hatten. Wir konnten uns früh aufteilen und alle arbeiteten in etwa gleich viel am Projekt. Das wir mit Kommentaren arbeiteten war für mich auch ungewohnt, ich konnte mich aber schnell daran gewöhnen und es half definitiv, den Code zu lesen, wobei ich fand, dass der Code meines Teams einfach zu lesen war.
 
-### Liliane
+### Liliane 
