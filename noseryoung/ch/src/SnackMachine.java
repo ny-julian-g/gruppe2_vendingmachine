@@ -1,6 +1,7 @@
 import exceptions.NotEnoughMoneyException;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * this class manages the money inside the snackmachine and removing items from the
@@ -30,9 +31,10 @@ public class SnackMachine {
             throw new NotEnoughMoneyException("not enough money");
         }
 
-        snackInventory.getSnack(snack);
+       if(snackInventory.getSnack(snack).isEmpty())throw new IllegalStateException("Snack is unavailable");
         money -= snackInventory.getPrice(snack);
     }
+
     public List<Snack> getAvailableSnacks() {
         return snackInventory.getAvailableSnacks();
     }
