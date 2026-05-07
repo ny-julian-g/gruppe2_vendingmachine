@@ -1,6 +1,7 @@
 import exceptions.NotEnoughMoneyException;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
 * this class manages the money the customer has.
@@ -36,5 +37,17 @@ public class Customer {
 
     public List<Snack> getAvailableSnacks() {
         return snackMachine.getAvailableSnacks();
+    }
+
+    public void restockSnacks(Optional<List<Integer>> values) {
+        snackMachine.restockSnacks(values);
+    }
+
+    public void setPrice(Snack snack, int price) {
+        snackMachine.setPrice(snack, price);
+    }
+
+    public void changeSnack(Snack oldSnack, String name, int count, int price) {
+        snackMachine.changeSnack(oldSnack, name, count, price);
     }
 }
