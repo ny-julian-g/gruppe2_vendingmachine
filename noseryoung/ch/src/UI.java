@@ -17,7 +17,8 @@ public class UI {
     Customer customer = new Customer(snackMachine);
 
     public void main(String[] args){
-        AdminMenu();
+        while (Menu()){
+        }
     }
 
     boolean Menu() {
