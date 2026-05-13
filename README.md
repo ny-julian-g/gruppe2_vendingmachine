@@ -34,6 +34,9 @@ Aufteilung gemäss UML
 - SnackInventory
 - SecretKeyAuthenticator
 
+Wir haben folgendes UML zum ganzen erstellt:
+![diagram.drawio (2).png](diagram.drawio%20%282%29.png)
+
 ## Planen
 ### Aufgabeneinteilung
 SecretKeyAuthenticator -> Fabian
@@ -42,9 +45,6 @@ Inventory -> Julian,
 Snack -> Julian + Fabian,
 SnackMachine -> Fabian,
 Customer -> Fabian
-
-Wir haben folgendes UML zum ganzen erstellt:
-![diagram.drawio (2).png](diagram.drawio%20%282%29.png)
 
 ### DoD
 Um später zu kontrollieren, ob wir das Projekt abgeschlossen haben, definieren wir hier folgende Anforderungen:
