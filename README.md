@@ -55,8 +55,7 @@ Um später zu kontrollieren, ob wir das Projekt abgeschlossen haben, definieren 
 
 
 ## Entscheiden
-Wir haben uns entschieden, ein UI statt CLI zu implementieren, da es interessanter ist. Dazu
-haben wir Java swing benutzt.
+Wir haben uns entschieden, ein UI statt CLI zu implementieren, da wir dies deutlich interessanter und benutzerfreundlicher fanden. Eine UI ermöglicht eine intuitivere Bedienung und sorgt dafür, dass die Anwendung leichter verständlich und zugänglicher ist. Für die Umsetzung der grafischen Oberfläche haben wir die Java-Bibliothek Java Swing verwendet. Mit Swing konnten wir verschiedene grafische Elemente wie Fenster, Buttons und Eingabefelder einfach erstellen und in unsere Anwendung integrieren.
 
 ## Realisieren
 Beim Realisieren haben wir darauf geachtet, immer Kommentare zu hinterlassen. Dadurch verstehen die anderen 
