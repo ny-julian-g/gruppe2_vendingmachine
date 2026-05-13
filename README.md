@@ -72,6 +72,11 @@ Admin-funktionen geht es von UI direkt zum Inventory, da diese keine logik entha
 
 Jegliche falschen Eingaben werden überprüft und mit einer Exception gehandelt, die im Frontend angezeigt wird. Dadurch
 konnten wir unser Programm "idiotensicher" machen und Abstürze verhindern. 
+
+Für eine bessere User-Experience haben wir ein modulares Numpad entwickelt. Um die neue Komponente effizient in alle
+bestehenden Dialoge zu integrieren, haben wir KI generierten Code verwendet. Wir haben dabei die 
+Architektur und das UI-Design definiert, während die KI die flächendeckende Implementierung im Code übernommen hat. 
+Dies ermöglichte eine schnellere Umsetzung ohne manuelle Flüchtigkeitsfehler.
   
 ## Kontrollieren
 Da wir eine DoD gemacht haben und die Anforderungen aufgeschrieben haben, werden wir das Programm basierend auf
