@@ -265,6 +265,7 @@ public class UI {
                     null,
                     "Enter new name: "
             );
+            if (newName.isEmpty()) return;
 
             Optional<String> input = NumpadDialog.show(
                     "Enter new count: ",
