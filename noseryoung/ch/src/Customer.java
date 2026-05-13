@@ -23,8 +23,11 @@ public class Customer {
     }
 
     public void buySnack(Snack snack) {
-        snackMachine.buySnack(snack);
-        money += snackMachine.refundLeftoverMoney();
+        try {
+            snackMachine.buySnack(snack);
+        } finally {
+            money += snackMachine.refundLeftoverMoney();
+        }
     }
 
     public void cancel() {

@@ -70,7 +70,7 @@ public class UI {
 
     void buySnack() {
         Optional<String> input = NumpadDialog.show(
-                "Please enter the snack ID. There are " + snackMachine.getMoney() + "$ in the machine"
+                "There are " + snackMachine.getMoney() + "$ in the machine"
         );
 
         if (input.isEmpty()) {
@@ -108,7 +108,7 @@ public class UI {
 
     void putMoneyInMachine() {
         Optional<String> input = NumpadDialog.show(
-                "Enter the amount of money to put in the machine. You have " + customer.getMoney() + "$ available",
+                "You have " + customer.getMoney() + "$ available",
                 "Amount"
         );
         if (input.isEmpty()) return;
