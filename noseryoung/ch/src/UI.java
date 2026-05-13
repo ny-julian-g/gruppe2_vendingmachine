@@ -1,4 +1,5 @@
 import exceptions.NotEnoughMoneyException;
+
 import javax.swing.*;
 import java.util.List;
 import java.util.Optional;
@@ -8,11 +9,11 @@ import java.util.Optional;
 public class UI {
     List<Snack> snacks;
 
-    SnackInventory inventory ;
-    SnackMachine snackMachine ;
+    SnackInventory inventory;
+    SnackMachine snackMachine;
     Customer customer;
 
-    public UI(List<Snack> snacks){
+    public UI(List<Snack> snacks) {
         this.snacks = snacks;
         this.inventory = new SnackInventory(snacks);
         this.snackMachine = new SnackMachine(inventory);
@@ -21,7 +22,7 @@ public class UI {
 
     void Menu() {
         while (true) {
-            String[] options = {"Show available Snacks", "Put money in machine", "buy snack", "exit"};
+            String[] options = {"Show available Snacks", "Put money in machine", "buy snack", "punch it!", "exit"};
 
             int choice = JOptionPane.showOptionDialog(
                     null,
@@ -40,9 +41,25 @@ public class UI {
                 putMoneyInMachine();
             } else if (choice == 2) {
                 buySnack();
+            } else if (choice == 3) {
+                punchMachine();
             } else {
                 break;
             }
+        }
+    }
+
+    private void punchMachine() {
+        if (Math.random() < 0.1) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Lets Go, a free snack just dropped!"
+            );
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "BONK!"
+            );
         }
     }
 
@@ -198,15 +215,14 @@ public class UI {
     }
 
     void restockAllSnacksUI() {
-        try{
+        try {
             inventory.restockAllSnacks();
 
             JOptionPane.showMessageDialog(
                     null,
                     "All snacks restocked!"
             );
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Unexpected exception occurred: " + e.getMessage());
         }
     }
