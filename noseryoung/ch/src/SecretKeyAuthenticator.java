@@ -48,9 +48,9 @@ public class SecretKeyAuthenticator {
         return salt;
     }
 
-    // used to initialize / change a pwd.hash file with a passphrase
+    // used to initialize / update a pwd.hash file with a passphrase
     static void main() {
-        char[] pwd = getPassphrase();
+        char[] pwd = getConsolePassphrase();
 
         byte[] salt = SecretKeyAuthenticator.generateSalt();
 
@@ -66,7 +66,7 @@ public class SecretKeyAuthenticator {
         }
     }
 
-    public static char[] getPassphrase() {
+    public static char[] getConsolePassphrase() {
         char[] pwd;
         Console console = System.console();
 
