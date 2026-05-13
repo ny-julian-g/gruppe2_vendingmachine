@@ -1,7 +1,7 @@
 import exceptions.NotEnoughMoneyException;
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 // This class displays the vending machine UI and contains no business logic.
 
@@ -69,30 +69,32 @@ public class UI {
     }
 
     void buySnack() {
-        String choice = JOptionPane.showInputDialog(
-                null,
-                "Please enter the snack ID. There are " + snackMachine.getMoney() + "$ in the machine",
-                "Buy Snack",
-                JOptionPane.PLAIN_MESSAGE
+        Optional<String> input = NumpadDialog.show(
+                "Please enter the snack ID. There are " + snackMachine.getMoney() + "$ in the machine"
         );
 
-        if (choice == null) {
+        if (input.isEmpty()) {
             return;
         }
 
+        String choice = input.get();
+
         if (SecretKeyAuthenticator.authenticatePassphrase(choice.toCharArray())) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Admin access granted!"
-            );
+            JOptionPane.showMessageDialog(null, "Admin access granted!");
             AdminMenu();
             return;
         }
+
         try {
             int id = Integer.parseInt(choice);
+
             Snack selectedSnack = inventory.getSnackById(id);
+
             customer.buySnack(selectedSnack);
-            JOptionPane.showMessageDialog(null, "Purchase successful! You now have " + customer.getMoney() + "$ and a " + selectedSnack.getName());
+
+            JOptionPane.showMessageDialog(null,
+                    "Purchase successful! You now have " + customer.getMoney() + "$ and a " + selectedSnack.getName());
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid Number.");
         } catch (IndexOutOfBoundsException e) {
@@ -105,13 +107,12 @@ public class UI {
     }
 
     void putMoneyInMachine() {
-        String choice = JOptionPane.showInputDialog(
-                null,
+        Optional<String> input = NumpadDialog.show(
                 "Enter the amount of money to put in the machine. You have " + customer.getMoney() + "$ available",
-                "put money in the machine",
-                JOptionPane.PLAIN_MESSAGE
+                "Amount"
         );
-        if (choice == null) return;
+        if (input.isEmpty()) return;
+        String choice = input.get();
         try {
             customer.putMoneyIntoMachine(Integer.parseInt(choice));
 
@@ -166,23 +167,21 @@ public class UI {
     private void restockSnackUI() {
         try {
 
-            String snackId = JOptionPane.showInputDialog(
-                    null,
+            Optional<String> snackIdInput = NumpadDialog.show(
                     "enter ID of snack to restock",
-                    "Restock Snack",
-                    JOptionPane.QUESTION_MESSAGE
+                    "ID"
             );
+            if (snackIdInput.isEmpty()) return;
 
-            Snack snack = inventory.getSnackById(Integer.parseInt(snackId));
+            Snack snack = inventory.getSnackById(Integer.parseInt(snackIdInput.get()));
 
-            String newCount = JOptionPane.showInputDialog(
-                    null,
+            Optional<String> newCountInput = NumpadDialog.show(
                     "enter new amount of the snack",
-                    "Restock Snack",
-                    JOptionPane.QUESTION_MESSAGE
+                    "Amount"
             );
+            if (newCountInput.isEmpty()) return;
 
-            snack.setCount(Integer.parseInt(newCount));
+            snack.setCount(Integer.parseInt(newCountInput.get()));
 
 
             JOptionPane.showMessageDialog(
@@ -215,24 +214,24 @@ public class UI {
     void setPriceUI() {
         try {
 
-            String idInput = JOptionPane.showInputDialog(
-                    null,
-                    "Enter snack ID: "
+            Optional<String> idInput = NumpadDialog.show(
+                    "Enter snack ID: ",
+                    "ID"
             );
-            if (idInput == null) return;
-            int id = Integer.parseInt(idInput);
+            if (idInput.isEmpty()) return;
+            int id = Integer.parseInt(idInput.get());
 
             Snack selectedSnack = inventory.getSnackById(id);
 
-            String priceInput = JOptionPane.showInputDialog(
-                    null,
-                    "Enter new price: "
+            Optional<String> priceInput = NumpadDialog.showDecimal(
+                    "Enter new price: ",
+                    "Price"
             );
-            if (priceInput == null) return;
+            if (priceInput.isEmpty()) return;
             float newPrice;
 
-            if (priceInput.trim().isEmpty()) newPrice = selectedSnack.getPrice();
-            else newPrice = Float.parseFloat(priceInput);
+            if (priceInput.get().trim().isEmpty()) newPrice = selectedSnack.getPrice();
+            else newPrice = Float.parseFloat(priceInput.get());
 
             selectedSnack.setPrice(newPrice);
 
@@ -253,12 +252,12 @@ public class UI {
     void changeSnackUI() {
         try {
 
-            String idInput = JOptionPane.showInputDialog(
-                    null,
-                    "Enter snack ID to change: "
+            Optional<String> idInput = NumpadDialog.show(
+                    "Enter snack ID to change: ",
+                    "ID"
             );
-            if (idInput == null) return;
-            int id = Integer.parseInt(idInput);
+            if (idInput.isEmpty()) return;
+            int id = Integer.parseInt(idInput.get());
 
             Snack snack = inventory.getSnackById(id);
 
@@ -267,20 +266,19 @@ public class UI {
                     "Enter new name: "
             );
 
-            String input = JOptionPane.showInputDialog(
-                    null,
-                    "Enter new count: "
+            Optional<String> input = NumpadDialog.show(
+                    "Enter new count: ",
+                    "Count"
             );
-            if (input == null) return;
-            int newCount = Integer.parseInt(input);
-            input = null;
+            if (input.isEmpty()) return;
+            int newCount = Integer.parseInt(input.get());
 
-            input = JOptionPane.showInputDialog(
-                    null,
-                    "Enter new price: "
+            input = NumpadDialog.showDecimal(
+                    "Enter new price: ",
+                    "Price"
             );
-            if (input == null) return;
-            float newPrice = Float.parseFloat(input);
+            if (input.isEmpty()) return;
+            float newPrice = Float.parseFloat(input.get());
 
             snack.setPrice(newPrice);
             snack.setCount(newCount);
