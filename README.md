@@ -84,7 +84,9 @@ diesen Anforderungen kontrollieren. Da dies die Dokumentation ist, werden wir di
 Wichtigste Schritte in Dokumentation festgehalten als erfüllt zählen. Die restlichen Anforderungen im Informieren-
 Teil haben wir ebenfalls abgeschlossen. Die Anforderungen, die wir vom Auftrag erhalten haben, funktionieren wie 
 beschrieben. Die Usereingaben sind auch absturzsicher, wobei man bei falschen Usereingaben einfach aus dem 
-Eingabefeld geworfen wird. Beim Kontrollieren fanden wir noch ein Fall, wo man nicht korrekt rausgeworfen wird, was wir noch korrigieren konnten.
+Eingabefeld geworfen wird. Beim Kontrollieren fanden wir noch ein Fall, wo man nicht korrekt rausgeworfen wird, was
+wir noch korrigieren konnten. Einen zweiten Fehler fanden wir bei der Snack-Auswahl: Wenn man zu wenig Geld hat,
+bleib das Geld im Automat, jetzt wird es wieder zurückgegeben.
 
 ## Auswerten
 Die Auswertung haben wir jeweils individuell geschrieben, um verschiedene Meinungen und Ansichten miteinzubeziehen.
