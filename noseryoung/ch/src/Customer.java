@@ -1,8 +1,5 @@
 import exceptions.NotEnoughMoneyException;
 
-import java.util.List;
-import java.util.Optional;
-
 /**
  * this class manages the money the customer has.
  * you can put money into the snack machine, get a snack

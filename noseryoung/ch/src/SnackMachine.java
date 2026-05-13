@@ -1,7 +1,5 @@
 import exceptions.NotEnoughMoneyException;
 
-import java.util.List;
-
 /**
  * this class manages the money inside the snackmachine and removing items from the
  * snackInventory when you buy an item.
