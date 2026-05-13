@@ -21,7 +21,7 @@
 ## Informieren
 Um zu wissen, was wir machen müssen, ist es hilfreich eine Liste, aller Anforderungen zu haben:
 ### Anforderungen
-- [ ] Vorgehensweise nach IPERKA
+- [x] Vorgehensweise nach IPERKA
 - [ ] Wichtigsten Schritte in Dokumentation festhalten (inkl. schöne Formatierung)
 - [x] Code auf GitHub abgelegt
 - [x] Teammitglieder und Berufsbildner eingeladen
@@ -50,8 +50,8 @@ Wir haben folgendes UML zum ganzen erstellt:
 Um später zu kontrollieren, ob wir das Projekt abgeschlossen haben, definieren wir hier folgende Anforderungen:
 
 - [ ] Anforderungen in Informieren-Teil erfüllt
-- [ ] Programm läuft wie in [Auftrag](./Anforderungen.md) definiert
-- [ ] Alle User-Eingaben sind absturzsicher.
+- [x] Programm läuft wie in [Auftrag](./Anforderungen.md) definiert
+- [x] Alle User-Eingaben sind absturzsicher.
 
 
 ## Entscheiden
