@@ -22,10 +22,10 @@
 Um zu wissen, was wir machen müssen, ist es hilfreich eine Liste, aller Anforderungen zu haben:
 ### Anforderungen
 - [x] Vorgehensweise nach IPERKA
-- [ ] Wichtigsten Schritte in Dokumentation festhalten (inkl. schöne Formatierung)
+- [x] Wichtigsten Schritte in Dokumentation festhalten (inkl. schöne Formatierung)
 - [x] Code auf GitHub abgelegt
 - [x] Teammitglieder und Berufsbildner eingeladen
-- [ ] Programm gemäss Auftrag realisieren (weiter ausgeführt in DoD)
+- [x] Programm gemäss Auftrag realisieren (weiter ausgeführt in DoD)
 
 ### Aufteilung des Programmes
 Aufteilung gemäss UML
@@ -49,7 +49,7 @@ Wir haben folgendes UML zum ganzen erstellt:
 ### DoD
 Um später zu kontrollieren, ob wir das Projekt abgeschlossen haben, definieren wir hier folgende Anforderungen:
 
-- [ ] Anforderungen in Informieren-Teil erfüllt
+- [x] Anforderungen in Informieren-Teil erfüllt
 - [x] Programm läuft wie in [Auftrag](./Anforderungen.md) definiert
 - [x] Alle User-Eingaben sind absturzsicher.
 
@@ -59,7 +59,8 @@ Wir haben uns entschieden, ein UI statt CLI zu implementieren, da es interessant
 haben wir Java swing benutzt.
 
 ## Realisieren
-Beim Realisieren haben wir darauf geachtet, immer Kommentare zu hinterlassen. Dadurch verstehen die anderen Teammitglieder
+Beim Realisieren haben wir darauf geachtet, immer Kommentare zu hinterlassen. Dadurch verstehen die anderen 
+Teammitglieder
 die Funktionen, ohne den ganzen Code lesen zu müssen.
 
 Für den Secret-Key haben wir eine File benutzt, die den salt und hash eines Password
@@ -74,7 +75,12 @@ Jegliche falschen Eingaben werden überprüft und mit einer Exception gehandelt,
 konnten wir unser Programm "idiotensicher" machen und Abstürze verhindern. 
   
 ## Kontrollieren
-
+Da wir eine DoD gemacht haben und die Anforderungen aufgeschrieben haben, werden wir das Programm basierend auf
+diesen Anforderungen kontrollieren. Da dies die Dokumentation ist, werden wir die Vorgehensweise nach IPERKA 
+Wichtigste Schritte in Dokumentation festgehalten als erfüllt zählen. Die restlichen Anforderungen im Informieren-
+Teil haben wir ebenfalls abgeschlossen. Die Anforderungen, die wir vom Auftrag erhalten haben, funktionieren wie 
+beschrieben. Die Usereingaben sind auch absturzsicher, wobei man bei falschen Usereingaben einfach aus dem 
+Eingabefeld geworfen wird. 
 
 ## Auswerten
 Die Auswertung haben wir jeweils individuell geschrieben, um verschiedene Meinungen und Ansichten miteinzubeziehen.
