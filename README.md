@@ -19,7 +19,7 @@
 
 
 ## Informieren
-Um zu wissen, was wir machen müssen, ist es hilfreich eine Liste, aller Anforderungen zu haben:
+Um einen klaren Überblick über das Projekt zu erhalten und strukturiert arbeiten zu können, ist es hilfreich, alle Anforderungen und Aufgaben in einer übersichtlichen Liste festzuhalten. Dadurch können wir sicherstellen, dass keine wichtigen Punkte vergessen gehen und der aktuelle Fortschritt jederzeit nachvollziehbar bleibt.
 ### Anforderungen
 - [x] Vorgehensweise nach IPERKA
 - [x] Wichtigsten Schritte in Dokumentation festhalten (inkl. schöne Formatierung)
